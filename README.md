@@ -3,7 +3,7 @@
 
 ## Api (.NET Core 3.1)
 - [ ] **Accounts.Api**
-    - [ ] Adding new account
+    - [ ] Add new account
     - [ ] Taking jwt token based on account data
 - [ ] **Records.Api**
     - [ ] Adding schedule event record (for checking API avability)
