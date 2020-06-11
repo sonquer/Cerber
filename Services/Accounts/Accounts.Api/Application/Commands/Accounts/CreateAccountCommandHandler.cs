@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Accounts.Domain.AggregateModels.AccountAggregate;
@@ -5,7 +6,7 @@ using MediatR;
 
 namespace Accounts.Api.Application.Commands.Accounts
 {
-    public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, long>
+    public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, Guid>
     {
         private readonly IAccountRepository _accountRepository;
 
@@ -14,7 +15,7 @@ namespace Accounts.Api.Application.Commands.Accounts
             _accountRepository = accountRepository;
         }
         
-        public async Task<long> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
             var account = new Account(request.Email, request.Password);
 

@@ -1,8 +1,9 @@
+using System;
 using MediatR;
 
 namespace Accounts.Api.Application.Commands.Accounts
 {
-    public class CreateAccountCommand : IRequest<long>
+    public class CreateAccountCommand : IRequest<Guid>
     {
         public string Email { get; set; }
         

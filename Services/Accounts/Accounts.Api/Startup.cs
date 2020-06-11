@@ -1,6 +1,8 @@
 using System;
 using System.Reflection;
+using Accounts.Domain.AggregateModels.AccountAggregate;
 using Accounts.Infrastructure;
+using Accounts.Infrastructure.Repository;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace Accounts.Api
 {
@@ -25,15 +28,32 @@ namespace Accounts.Api
         {
             services.AddDbContext<AccountsContext>(options =>
             {
-                var accountEndpoint = Environment.GetEnvironmentVariable("ACCOUNT_ENDPOINT") ?? throw new InvalidOperationException("Missing ACCOUNT_ENDPOINT env. variable");
-                var accountKey = Environment.GetEnvironmentVariable("ACCOUNT_KEY") ?? throw new InvalidOperationException("Missing ACCOUNT_KEY env. variable");
-                var databaseName = Environment.GetEnvironmentVariable("DATABASE_NAME") ?? throw new InvalidOperationException("Missing DATABASE_NAME env. variable");
+                var accountEndpoint = Configuration["Cosmos:Endpoint"];
+                var accountKey = Configuration["Cosmos:Key"];
+                var databaseName = Configuration["Cosmos:DatabaseName"];
                 
                 options.UseCosmos(accountEndpoint, accountKey, databaseName);
             });
             
             services.AddMediatR(Assembly.GetExecutingAssembly())
+                .AddScoped<IAccountRepository, AccountRepository>()
                 .AddAutoMapper(Assembly.GetExecutingAssembly());
+            
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Cerber.Accounts.Api", 
+                    Version = "v1",
+                    Description = "Cerber accounts api",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Patryk Pasek",
+                        Email = string.Empty,
+                        Url = new Uri("http://github.com/sonquer"),
+                    },
+                });
+            });
             
             services.AddControllers();
         }
@@ -51,6 +71,13 @@ namespace Accounts.Api
             app.UseRouting();
 
             app.UseAuthorization();
+            
+            app.UseSwagger();
+            
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cerber Accounts Api");
+            });
 
             app.UseEndpoints(endpoints =>
             {

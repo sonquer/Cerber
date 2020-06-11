@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Accounts.Domain.AggregateModels.AccountAggregate;
@@ -19,13 +20,15 @@ namespace Accounts.Infrastructure.Repository
         
         public async Task<Account> AddAsync(Account account, CancellationToken cancellationToken)
         {
+            await _accountsContext.Database.EnsureCreatedAsync(cancellationToken);
+            
             await _accountsContext.Accounts.AddAsync(account, cancellationToken)
                 .ConfigureAwait(false);
             
             return account;
         }
 
-        public async Task<Account> GetById(long id, CancellationToken cancellationToken)
+        public async Task<Account> GetById(Guid id, CancellationToken cancellationToken)
         {
             var account = await _accountsContext.Accounts.FirstOrDefaultAsync(e => e.Id == id, cancellationToken)
                 .ConfigureAwait(false);

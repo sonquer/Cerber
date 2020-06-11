@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Accounts.Api.Application.Commands.Accounts;
@@ -15,9 +16,11 @@ namespace Accounts.UnitTests.Application.Commands.Controllers
         [Fact]
         public async Task AccountsController_CreateAccount_EventSend_Success()
         {
+            var guid = Guid.NewGuid();
+            
             var mediator = new Mock<IMediator>();
             mediator.Setup(e => e.Send(It.IsAny<CreateAccountCommand>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(1);
+                .ReturnsAsync(guid);
 
             var accountsController = new AccountsController(mediator.Object);
 
@@ -33,7 +36,7 @@ namespace Accounts.UnitTests.Application.Commands.Controllers
             
             var objectResult = Assert.IsAssignableFrom<OkObjectResult>(createdAccountActionResult);
             
-            Assert.Equal((long)1, objectResult.Value);
+            Assert.Equal(guid, objectResult.Value);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Accounts.Api.Application.Commands.Accounts;
@@ -36,7 +37,7 @@ namespace Accounts.UnitTests.Application.Commands.Accounts
             var accountId = await createAccountCommandHandler.Handle(new CreateAccountCommand("test", "password"), CancellationToken.None)
                 .ConfigureAwait(false);
             
-            Assert.Equal(1, accountId);
+            Assert.True(Guid.TryParse(accountId.ToString(), out var unused));
         }
     }
 }
