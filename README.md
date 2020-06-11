@@ -13,9 +13,9 @@ Availability check app architecture
 ---
 ## Backend
 ### Api (.NET Core 3.1)
-- [ ] **Accounts.Api**
+- [x] **Accounts.Api**
     - [x] Add new account
-    - [ ] Taking jwt token based on account data
+    - [x] Taking jwt token based on account data
 - [ ] **Records.Api**
     - [ ] Adding schedule event record (for checking API avability)
     - [ ] Display all schedule events assigned to account
