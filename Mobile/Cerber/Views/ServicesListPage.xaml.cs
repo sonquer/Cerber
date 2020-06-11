@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿using System.Collections.ObjectModel;
+using Cerber.Models;
+using Cerber.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,33 +9,44 @@ namespace Cerber.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ServicesListPage : ContentPage
     {
-        public ObservableCollection<string> Items { get; set; }
+        public ObservableCollection<ServiceModel> Services { get; set; }
+
+        private ServicesListViewModel _viewModel => BindingContext as ServicesListViewModel;
 
         public ServicesListPage()
         {
             InitializeComponent();
 
-            Items = new ObservableCollection<string>
+            BindingContext = new ServicesListViewModel(Navigation);
+
+            Services = new ObservableCollection<ServiceModel>
             {
-                "Item 1",
-                "Item 2",
-                "Item 3",
-                "Item 4",
-                "Item 5"
+                new ServiceModel
+                {
+                    Id = "12345",
+                    Name = "test",
+                    Status = "OK"
+                }
             };
 
-            MyListView.ItemsSource = Items;
+            ServicesListView.ItemsSource = Services;
         }
 
-        async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item == null)
+            {
                 return;
+            }
 
-            await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
+            _viewModel.GoToDetailsCommand.Execute(e.Item as ServiceModel);
 
-            //Deselect Item
             ((ListView)sender).SelectedItem = null;
+        }
+
+        void Button_Clicked(object sender, System.EventArgs e)
+        {
+            _viewModel.GoToAttachServiceCommand.Execute(null);
         }
     }
 }

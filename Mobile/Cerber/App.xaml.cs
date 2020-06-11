@@ -1,7 +1,5 @@
 ﻿using Cerber.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Cerber
 {
@@ -11,7 +9,7 @@ namespace Cerber
         {
             InitializeComponent();
 
-            MainPage = new ServicesListPage();
+            MainPage = new NavigationPage(new ServicesListPage());
         }
 
         protected override void OnStart()
