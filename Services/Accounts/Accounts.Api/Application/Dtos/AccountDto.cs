@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Accounts.Api.Application.Dtos
 {
-    public class CreateAccountDto
+    public class AccountDto
     {
         [EmailAddress]
         public string Email { get; set; }

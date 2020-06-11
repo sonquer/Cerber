@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using Accounts.Api.Application.Services;
 using Accounts.Domain.AggregateModels.AccountAggregate;
 using Accounts.Infrastructure;
 using Accounts.Infrastructure.Repository;
@@ -37,6 +38,7 @@ namespace Accounts.Api
             
             services.AddMediatR(Assembly.GetExecutingAssembly())
                 .AddScoped<IAccountRepository, AccountRepository>()
+                .AddScoped<IAuthorizationService, JwtAuthorizationService>()
                 .AddAutoMapper(Assembly.GetExecutingAssembly());
             
             services.AddSwaggerGen(c =>
