@@ -2,6 +2,18 @@
 <StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Cerber.Components.ServiceItemComponent">
-    <Label Text="{Binding Path=Name}" />
-    <Label Text="{Binding Path=Status}"/>
+    <Frame
+        CornerRadius="20"
+        BackgroundColor="White"
+        HasShadow="True" 
+        OutlineColor="LightGray">
+        <StackLayout>
+    <Label Text="{Binding Path=Name}"
+           TextColor="White"
+           FontSize="Medium"/>
+    <Label Text="{Binding Path=Status}"
+           TextColor="White"
+           FontSize="Small"/>
+        </StackLayout>
+    </Frame>
 </StackLayout>

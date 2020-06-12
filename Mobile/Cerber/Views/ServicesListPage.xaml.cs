@@ -26,6 +26,12 @@ namespace Cerber.Views
                     Id = "12345",
                     Name = "test",
                     Status = "OK"
+                },
+                new ServiceModel
+                {
+                    Id = "34345",
+                    Name = "oki",
+                    Status = "error"
                 }
             };
 

@@ -10,7 +10,9 @@
         <ListView x:Name="ServicesListView"
                   ItemsSource="{Binding Services}"
                   ItemTapped="Handle_ItemTapped"
-                  CachingStrategy="RecycleElement">
+                  CachingStrategy="RecycleElement"
+                  RowHeight="100"
+                  Margin="10">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -21,6 +23,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
          </ListView>
-        <Button Text="Attach service" Clicked="Button_Clicked"/>
+        <Button Style="{StaticResource NewAttachServiceButton}"
+                Text="+" 
+                FontSize="Large"
+                Clicked="Button_Clicked"/>
     </StackLayout>
 </ContentPage>
