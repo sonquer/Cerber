@@ -17,4 +17,9 @@
     <ProjectReference Include="..\Availability.Domain\Availability.Domain.csproj" />
     <ProjectReference Include="..\Availability.Api\Availability.Api.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\" />
+    <Folder Include="Application\" />
+    <Folder Include="Domain\AggregateModels\" />
+  </ItemGroup>
 </Project>

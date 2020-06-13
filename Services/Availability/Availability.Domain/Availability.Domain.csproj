@@ -6,5 +6,9 @@
 
   <ItemGroup>
     <Folder Include="AggregateModels\" />
+    <Folder Include="AggregateModels\AvailabilityRecordAggregate\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.0.1" />
   </ItemGroup>
 </Project>
