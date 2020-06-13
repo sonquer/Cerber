@@ -16,7 +16,7 @@ Availability check app architecture
 - [x] **Accounts.Api**
     - [x] Add new account
     - [x] Taking jwt token based on account data
-- [ ] **Records.Api**
+- [ ] **Availability.Api**
     - [ ] Adding schedule event record (for checking API avability)
     - [ ] Display all schedule events assigned to account
     - [ ] Function for connecting mobile device with schedule event results
