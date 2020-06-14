@@ -53,14 +53,13 @@ namespace Accounts.Api
                         Name = "Patryk Pasek",
                         Email = string.Empty,
                         Url = new Uri("http://github.com/sonquer"),
-                    },
+                    }
                 });
             });
             
             services.AddControllers();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -73,6 +72,11 @@ namespace Accounts.Api
             app.UseRouting();
 
             app.UseAuthorization();
+            
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
             
             app.UseSwagger();
             

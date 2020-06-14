@@ -18,7 +18,7 @@ namespace Availability.Domain.AggregateModels.AvailabilityRecordAggregate
         
         public List<AvailabilityLog> AvailabilityLogs { get; protected set; }
         
-        public int LogLifetimeThresholdInHours { get; set; }
+        public int LogLifetimeThresholdInHours { get; protected set; }
 
         public AvailabilityRecord(Guid accountId,
             string url,
@@ -26,6 +26,8 @@ namespace Availability.Domain.AggregateModels.AvailabilityRecordAggregate
             string expectedResponse,
             int logLifetimeThresholdInHours)
         {
+            PartitionKey = Guid.NewGuid();
+            Id = Guid.NewGuid();
             AccountId = accountId;
             Url = url;
             ExpectedStatusCode = expectedStatusCode;

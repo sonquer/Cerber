@@ -22,6 +22,8 @@ namespace Availability.Infrastructure.Repositories
         
         public async Task<AvailabilityRecord> AddAsync(AvailabilityRecord availabilityRecord, CancellationToken cancellationToken)
         {
+            await _availabilityContext.Database.EnsureCreatedAsync(cancellationToken);
+            
             await _availabilityContext.AvailabilityRecords.AddAsync(availabilityRecord, cancellationToken)
                 .ConfigureAwait(false);
 
