@@ -3,13 +3,23 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
   
-  <Style TargetType="Button" x:Key="NewAttachServiceButton">
-    <Setter Property="BorderRadius" Value="50" />
-    <Setter Property="HorizontalOptions" Value="End" />
+<Style TargetType="Button" x:Key="NewAttachServiceButton">
+    <Setter Property="BorderRadius" Value="30" />
+    <Setter Property="HorizontalOptions" Value="Center" />
     <Setter Property="VerticalOptions" Value="EndAndExpand" />
-    <Setter Property="BackgroundColor" Value="#5b178a" />
-    <Setter Property="TextColor" Value="White" />
-    <Setter Property="WidthRequest" Value="50" />
-    <Setter Property="BorderHeight" Value="2" />
-  </Style>
+    <Setter Property="TextColor" Value="Black" />
+    <Setter Property="BorderWidth" Value="5" />
+    <Setter Property="Margin" Value="0,0,0,40" />
+    <Setter Property="BorderColor" Value="#5b178a"/>
+    <Setter Property="BackgroundColor" Value="White"/>
+</Style>
+
+<Style TargetType="Button" x:Key="AttachServiceOkButton">
+    <Setter Property="BorderRadius" Value="30" />
+    <Setter Property="HorizontalOptions" Value="End" />
+    <Setter Property="Margin" Value="0,0,20,0" />
+    <Setter Property="BorderWidth" Value="5" />
+    <Setter Property="BorderColor" Value="#5b178a"/>
+    <Setter Property="BackgroundColor" Value="White"/>
+</Style>
 </ResourceDictionary>

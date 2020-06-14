@@ -7,9 +7,10 @@
              x:Class="Cerber.Views.AttachServicesPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Entry Placeholder="Input"
+                   Margin="30,30,30,30"/>
+            <Button Style="{StaticResource AttachServiceOkButton}"
+                    Text="OK"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

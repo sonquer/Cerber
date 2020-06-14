@@ -24,8 +24,7 @@
             </ListView.ItemTemplate>
          </ListView>
         <Button Style="{StaticResource NewAttachServiceButton}"
-                Text="+" 
-                FontSize="Large"
+                Text="Add" 
                 Clicked="Button_Clicked"/>
     </StackLayout>
 </ContentPage>
