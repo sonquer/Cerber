@@ -22,5 +22,9 @@ namespace Availability.Domain.AggregateModels.AvailabilityRecordAggregate
             Body = body;
             ResponseTime = responseTime;
         }
+
+        protected AvailabilityLog()
+        {
+        }
     }
 }

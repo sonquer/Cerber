@@ -25,8 +25,7 @@ namespace Availability.Infrastructure.EntityTypeConfigurations
                 .HasConversion(converter)
                 .ValueGeneratedNever();
 
-            builder.OwnsOne(e => e.AvailabilityLogs, 
-                action => action.ToJsonProperty("AvailabilityLogs"));
+            builder.OwnsMany(e => e.AvailabilityLogs);
         }
     }
 }

@@ -36,8 +36,17 @@ namespace Availability.Domain.AggregateModels.AvailabilityRecordAggregate
             LogLifetimeThresholdInHours = logLifetimeThresholdInHours;
         }
 
+        protected AvailabilityRecord()
+        {
+        }
+
         public AvailabilityLog AppendLog(int statusCode, string body, long responseTime)
         {
+            if (AvailabilityLogs is null)
+            {
+                AvailabilityLogs = new List<AvailabilityLog>();
+            }
+            
             var availabilityLog = new AvailabilityLog(DateTime.UtcNow, statusCode, body, responseTime);
             
             AvailabilityLogs.Add(availabilityLog);
