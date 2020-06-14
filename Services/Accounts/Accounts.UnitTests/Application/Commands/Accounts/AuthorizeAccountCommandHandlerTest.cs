@@ -7,7 +7,6 @@ using Accounts.Domain.AggregateModels.AccountAggregate;
 using Accounts.Infrastructure;
 using Accounts.Infrastructure.Repository;
 using Accounts.UnitTests.Application.Services;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Moq;
@@ -26,14 +25,12 @@ namespace Accounts.UnitTests.Application.Commands.Accounts
             var options = new DbContextOptionsBuilder<AccountsContext>()
                 .UseInMemoryDatabase(nameof(JwtAuthorizationServiceTest))
                 .Options;
-            
-            var mediator = new Mock<IMediator>();
-            
+
             var configuration = new Mock<IConfiguration>();
             configuration.Setup(e => e[It.IsAny<string>()])
                 .Returns("SeCrEtKeYSeCrEtKeYSeCrEtKeYSeCrEtKeYSeCrEtKeY");
             
-            var databaseContext = new AccountsContext(options, mediator.Object);
+            var databaseContext = new AccountsContext(options);
             
             _accountRepository = new AccountRepository(databaseContext);
             
