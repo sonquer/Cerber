@@ -66,5 +66,16 @@ namespace Availability.Api.Controllers
             
             return Ok(record);
         }
+        
+        [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        public async Task<IActionResult> DeleteAvailabilityRecord(Guid id, CancellationToken cancellationToken)
+        {
+            await _mediator
+                .Publish(new DeleteAvailabilityRecordCommand(id, User), cancellationToken)
+                .ConfigureAwait(false);
+
+            return NoContent();
+        }
     }
 }

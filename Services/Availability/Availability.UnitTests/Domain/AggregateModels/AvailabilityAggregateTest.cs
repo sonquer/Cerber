@@ -18,6 +18,8 @@ namespace Availability.UnitTests.Domain.AggregateModels
                 "{}",
                 1);
             
+            Assert.True(IsValidGuid(availabilityRecord.Id));
+            Assert.True(IsValidGuid(availabilityRecord.PartitionKey));
             Assert.Equal(accountId, availabilityRecord.AccountId);
             Assert.Equal("test name", availabilityRecord.Name);
             Assert.Equal("http://google.com", availabilityRecord.Url);
@@ -26,7 +28,9 @@ namespace Availability.UnitTests.Domain.AggregateModels
             Assert.Equal(1, availabilityRecord.LogLifetimeThresholdInHours);
             Assert.Equal("ST_OK", availabilityRecord.Status);
         }
-        
+
+        private static bool IsValidGuid(Guid guid) => Guid.TryParse(guid.ToString(), out var unused);
+
         [Fact]
         public void Availability_HasExpectedResponse_HasExpectedResponseIsTrue()
         {

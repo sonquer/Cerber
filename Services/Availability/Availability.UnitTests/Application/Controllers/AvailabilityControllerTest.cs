@@ -134,5 +134,18 @@ namespace Availability.UnitTests.Application.Controllers
             Assert.Equal("{}", recordDto.AvailabilityLogs.First().Body);
             Assert.Equal(DateTime.MinValue, recordDto.AvailabilityLogs.First().CreatedAt);
         }
+        
+        [Fact]
+        public async Task AvailabilityController_DeleteAvailabilityRecord_AvailabilityRecordDeleted()
+        {
+            var mediator = new Mock<IMediator>();
+            var availabilityController = new AvailabilityController(mediator.Object);
+
+            var response = await availabilityController
+                .DeleteAvailabilityRecord(Guid.Empty, CancellationToken.None)
+                .ConfigureAwait(false);
+
+            Assert.IsAssignableFrom<NoContentResult>(response);
+        }
     }
 }
