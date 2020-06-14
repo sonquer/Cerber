@@ -15,16 +15,16 @@ using Xunit;
 
 namespace Availability.UnitTests.Application.Commands.Availability
 {
-    public class GetAvailabilityRecordsCommandHandlerTest
+    public class GetAvailabilityListItemsCommandHandlerTest
     {
         private readonly IAvailabilityRecordRepository _availabilityRecordRepository;
 
         private readonly IClaimConverter _claimConverter;
         
-        public GetAvailabilityRecordsCommandHandlerTest()
+        public GetAvailabilityListItemsCommandHandlerTest()
         {
             var options = new DbContextOptionsBuilder<AvailabilityContext>()
-                .UseInMemoryDatabase(nameof(GetAvailabilityRecordsCommandHandlerTest))
+                .UseInMemoryDatabase(nameof(GetAvailabilityListItemsCommandHandlerTest))
                 .Options;
             
             var availabilityContext = new AvailabilityContext(options);
@@ -40,9 +40,10 @@ namespace Availability.UnitTests.Application.Commands.Availability
             var accountId = Guid.NewGuid();
 
             var availabilityRecord = new AvailabilityRecord(accountId, 
+                "test name",
                 "http://google.com/", 
                 200, 
-                null, 
+                "{}", 
                 2);
             
             availabilityRecord.AppendLog(200, "{}", 66);
@@ -63,22 +64,18 @@ namespace Availability.UnitTests.Application.Commands.Availability
             
             var mapper = configuration.CreateMapper();
 
-            var getAvailabilityRecordsCommandHandler = new GetAvailabilityRecordsCommandHandler(_availabilityRecordRepository, 
+            var getAvailabilityRecordsCommandHandler = new GetAvailabilityListItemsCommandHandler(_availabilityRecordRepository, 
                 _claimConverter, 
                 mapper);
 
-            var availabilityRecordDtos = await getAvailabilityRecordsCommandHandler
-                .Handle(new GetAvailabilityRecordsCommand(claimsPrincipal), CancellationToken.None)
+            var availabilityListItemDtos = await getAvailabilityRecordsCommandHandler
+                .Handle(new GetAvailabilityListItemsCommand(claimsPrincipal), CancellationToken.None)
                 .ConfigureAwait(false);
             
-            Assert.Equal(availabilityRecord.Id, availabilityRecordDtos.First().Id);
-            Assert.Equal("http://google.com/", availabilityRecordDtos.First().Url);
-            Assert.Equal(200, availabilityRecordDtos.First().ExpectedStatusCode);
-            Assert.Null(availabilityRecordDtos.First().ExpectedResponse);
-            Assert.Equal(2, availabilityRecordDtos.First().LogLifetimeThresholdInHours);
-            Assert.Equal("{}", availabilityRecordDtos.First().AvailabilityLogs.First().Body);
-            Assert.Equal(66, availabilityRecordDtos.First().AvailabilityLogs.First().ResponseTime);
-            Assert.Equal(200, availabilityRecordDtos.First().AvailabilityLogs.First().StatusCode);
+            Assert.Equal(availabilityRecord.Id, availabilityListItemDtos.First().Id);
+            Assert.Equal("http://google.com/", availabilityListItemDtos.First().Url);
+            Assert.Equal("test name", availabilityListItemDtos.First().Name);
+            Assert.Equal("ST_OK", availabilityListItemDtos.First().Status);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Availability.Api.Application.Mappings
         {
             CreateMap<AvailabilityRecord, AvailabilityRecordDto>();
             CreateMap<AvailabilityLog, AvailabilityLogDto>();
+            CreateMap<AvailabilityRecord, AvailabilityListItemDto>();
         }
     }
 }

@@ -34,6 +34,7 @@ namespace Availability.Worker.UnitTests.Application.Processors
         public async Task AvailabilityProcessor_ProcessAvailabilityRecord_RecordProcessed()
         {
             var availabilityRecord = new AvailabilityRecord(Guid.NewGuid(), 
+                "test name",
                 "http://google.com/", 
                 200, 
                 null, 

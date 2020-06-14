@@ -5,11 +5,11 @@ using MediatR;
 
 namespace Availability.Api.Application.Commands.Availability
 {
-    public class GetAvailabilityRecordsCommand : IRequest<List<AvailabilityRecordDto>>
+    public class GetAvailabilityListItemsCommand : IRequest<List<AvailabilityListItemDto>>
     {
         public ClaimsPrincipal ClaimsPrincipal { get; set; }
 
-        public GetAvailabilityRecordsCommand(ClaimsPrincipal claimsPrincipal)
+        public GetAvailabilityListItemsCommand(ClaimsPrincipal claimsPrincipal)
         {
             ClaimsPrincipal = claimsPrincipal;
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace Availability.Api.Controllers
         public async Task<IActionResult> CreateAvailabilityRecord([FromBody] AvailabilityRecordDto availabilityRecordDto, CancellationToken cancellationToken)
         {
             await _mediator.Publish(new CreateAvailabilityRecordCommand(User,
+                availabilityRecordDto.Name,
                 availabilityRecordDto.Url,
                 availabilityRecordDto.ExpectedStatusCode,
                 availabilityRecordDto.ExpectedResponse,
@@ -33,14 +35,36 @@ namespace Availability.Api.Controllers
             return NoContent();
         }
         
-        [HttpGet("List")]
-        [ProducesResponseType(typeof(List<AvailabilityRecordDto>), 200)]
-        public async Task<IActionResult> GetAvailabilityRecords(CancellationToken cancellationToken)
+        [HttpGet]
+        [ProducesResponseType(typeof(List<AvailabilityListItemDto>), 200)]
+        public async Task<IActionResult> GetAvailabilityListItems(CancellationToken cancellationToken)
         {
-            var recordDtos = await _mediator.Send(new GetAvailabilityRecordsCommand(User), cancellationToken)
+            var recordDtos = await _mediator.Send(new GetAvailabilityListItemsCommand(User), cancellationToken)
                 .ConfigureAwait(false);
             
             return Ok(recordDtos);
+        }
+        
+        [HttpPost("List")]
+        [ProducesResponseType(typeof(List<AvailabilityListItemDto>), 200)]
+        public async Task<IActionResult> GetAvailabilityListItemsByIds(List<Guid> ids, CancellationToken cancellationToken)
+        {
+            var recordDtos = await _mediator
+                .Send(new GetAvailabilityListItemsByIdsCommand(ids), cancellationToken)
+                .ConfigureAwait(false);
+            
+            return Ok(recordDtos);
+        }
+        
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(AvailabilityRecordDto), 200)]
+        public async Task<IActionResult> GetAvailabilityRecordById(Guid id, CancellationToken cancellationToken)
+        {
+            var record = await _mediator
+                .Send(new GetAvailabilityRecordByIdCommand(id), cancellationToken)
+                .ConfigureAwait(false);
+            
+            return Ok(record);
         }
     }
 }

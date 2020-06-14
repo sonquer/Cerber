@@ -10,7 +10,7 @@ using MediatR;
 
 namespace Availability.Api.Application.Commands.Availability
 {
-    public class GetAvailabilityRecordsCommandHandler : IRequestHandler<GetAvailabilityRecordsCommand, List<AvailabilityRecordDto>>
+    public class GetAvailabilityListItemsCommandHandler : IRequestHandler<GetAvailabilityListItemsCommand, List<AvailabilityListItemDto>>
     {
         private readonly IAvailabilityRecordRepository _availabilityRecordRepository;
         
@@ -18,7 +18,7 @@ namespace Availability.Api.Application.Commands.Availability
 
         private readonly IMapper _mapper;
 
-        public GetAvailabilityRecordsCommandHandler(IAvailabilityRecordRepository availabilityRecordRepository,
+        public GetAvailabilityListItemsCommandHandler(IAvailabilityRecordRepository availabilityRecordRepository,
             IClaimConverter claimConverter,
             IMapper mapper)
         {
@@ -27,13 +27,13 @@ namespace Availability.Api.Application.Commands.Availability
             _mapper = mapper;
         }
         
-        public async Task<List<AvailabilityRecordDto>> Handle(GetAvailabilityRecordsCommand request, CancellationToken cancellationToken)
+        public async Task<List<AvailabilityListItemDto>> Handle(GetAvailabilityListItemsCommand request, CancellationToken cancellationToken)
         {
             var accountId = _claimConverter.GetAccountId(request.ClaimsPrincipal);
             
             var availabilityRecords = await _availabilityRecordRepository.GetByAccountId(accountId, cancellationToken);
 
-            return availabilityRecords.Select(_mapper.Map<AvailabilityRecordDto>).ToList();
+            return availabilityRecords.Select(_mapper.Map<AvailabilityListItemDto>).ToList();
         }
     }
 }

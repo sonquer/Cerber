@@ -46,6 +46,7 @@ namespace Availability.Worker.UnitTests.Application.Commands
                 availabilityProcessor);
             
             var availabilityRecord = new AvailabilityRecord(Guid.NewGuid(), 
+                "test name",
                 "http://google.com", 
                 200, 
                 null, 

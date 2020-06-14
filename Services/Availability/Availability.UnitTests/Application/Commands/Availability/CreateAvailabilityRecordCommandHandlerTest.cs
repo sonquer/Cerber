@@ -46,6 +46,7 @@ namespace Availability.UnitTests.Application.Commands.Availability
                 _claimConverter);
 
             await createAvailabilityRecordCommandHandler.Handle(new CreateAvailabilityRecordCommand(claimsPrincipal,
+                "test name",
                 "http://google.com/",
                 200,
                 "{}",
@@ -56,6 +57,7 @@ namespace Availability.UnitTests.Application.Commands.Availability
 
             Assert.Single(records);
             Assert.Equal(accountId, records.First().AccountId);
+            Assert.Equal("test name", records.First().Name);
             Assert.Equal("http://google.com/", records.First().Url);
             Assert.Equal(200, records.First().ExpectedStatusCode);
             Assert.Equal("{}", records.First().ExpectedResponse);

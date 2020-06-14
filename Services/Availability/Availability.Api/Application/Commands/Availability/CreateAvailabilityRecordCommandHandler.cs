@@ -24,6 +24,7 @@ namespace Availability.Api.Application.Commands.Availability
             var accountId = _claimConverter.GetAccountId(notification.ClaimsPrincipal);
             
             var availabilityRecord = new AvailabilityRecord(accountId, 
+                notification.Name,
                 notification.Url, 
                 notification.ExpectedStatusCode, 
                 notification.ExpectedResponse,
