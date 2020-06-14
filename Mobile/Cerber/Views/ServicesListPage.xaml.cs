@@ -23,15 +23,21 @@ namespace Cerber.Views
             {
                 new ServiceModel
                 {
-                    Id = "12345",
-                    Name = "test",
-                    Status = "OK"
+                    Id = "1",
+                    Name = "Main.Api",
+                    Image = "ok.png"
                 },
                 new ServiceModel
                 {
-                    Id = "34345",
-                    Name = "oki",
-                    Status = "error"
+                    Id = "2",
+                    Name = "Import.Api",
+                    Image = "ok.png"
+                },
+                new ServiceModel
+                {
+                    Id = "3",
+                    Name = "Search.Api",
+                    Image = "error.png"
                 }
             };
 

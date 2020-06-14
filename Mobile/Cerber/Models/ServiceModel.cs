@@ -1,4 +1,6 @@
-﻿namespace Cerber.Models
+﻿using Xamarin.Forms;
+
+namespace Cerber.Models
 {
     public class ServiceModel
     {
@@ -6,6 +8,6 @@
 
         public string Name { get; set; }
 
-        public string Status { get; set; }
+        public string Image { get; set; }
     }
 }

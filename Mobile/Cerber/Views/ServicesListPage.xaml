@@ -11,8 +11,8 @@
                   ItemsSource="{Binding Services}"
                   ItemTapped="Handle_ItemTapped"
                   CachingStrategy="RecycleElement"
-                  RowHeight="100"
-                  Margin="10">
+                  RowHeight="75"
+                  Margin="15">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

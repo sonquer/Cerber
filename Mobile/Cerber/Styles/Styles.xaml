@@ -7,7 +7,7 @@
     <Setter Property="BorderRadius" Value="50" />
     <Setter Property="HorizontalOptions" Value="End" />
     <Setter Property="VerticalOptions" Value="EndAndExpand" />
-    <Setter Property="BackgroundColor" Value="#FF1493" />
+    <Setter Property="BackgroundColor" Value="#5b178a" />
     <Setter Property="TextColor" Value="White" />
     <Setter Property="WidthRequest" Value="50" />
     <Setter Property="BorderHeight" Value="2" />

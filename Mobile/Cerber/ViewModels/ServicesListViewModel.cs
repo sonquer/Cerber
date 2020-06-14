@@ -14,7 +14,6 @@ namespace Cerber.ViewModels
             _navigation = navigation;
         }
 
-
         public ICommand GoToDetailsCommand => new Command<ServiceModel>(OnGoToDetails);
 
         private void OnGoToDetails(ServiceModel item)
