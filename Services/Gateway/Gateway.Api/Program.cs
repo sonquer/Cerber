@@ -1,8 +1,9 @@
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-namespace Accounts.Api
+namespace Gateway.Api
 {
     public class Program
     {
@@ -13,13 +14,16 @@ namespace Accounts.Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureAppConfiguration((hostingContext, config) => {
                     var env = hostingContext.HostingEnvironment.EnvironmentName;
 
                     config.SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
                         .AddJsonFile("appsettings.json", true, true)
                         .AddJsonFile($"appsettings.{env}.json", true, true)
-                        .AddEnvironmentVariables("ACCOUNTSAPI_");
+                        .AddJsonFile(Path.Combine("Configurations", "ocelot.json"))
+                        .AddJsonFile(Path.Combine("Configurations", $"ocelot.{env}.json"), true)
+                        .AddEnvironmentVariables("GATEWAYAPI_");
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

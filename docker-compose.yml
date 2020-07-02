@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  cerber-gateway-api:
+    image: cerber-gateway-api
+    build:
+      context: .
+      dockerfile: Services/Gateway/Gateway.Api/Dockerfile
+    depends_on:
+        - cerber-accounts-api
+        - cerber-availability-api
+
+  cerber-accounts-api:
+    image: cerber-accounts-api
+    build:
+      context: .
+      dockerfile: Services/Accounts/Accounts.Api/Dockerfile
+
+  cerber-availability-api:
+    image: cerber-availability-api
+    build:
+      context: .
+      dockerfile: Services/Availability/Availability.Api/Dockerfile
+
+
+  cerber-availability-worker:
+    image: cerber-availability-worker
+    build:
+      context: .
+      dockerfile: Services/Availability/Availability.Worker/Dockerfile

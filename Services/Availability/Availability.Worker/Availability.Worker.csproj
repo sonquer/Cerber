@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <UserSecretsId>dotnet-Availability.Worker-B3095ACE-B353-4F6A-A7A7-2E0671018C77</UserSecretsId>
+        <DockerComposeProjectPath>../../../docker-compose.dcproj</DockerComposeProjectPath>
     </PropertyGroup>
 
     <ItemGroup>
