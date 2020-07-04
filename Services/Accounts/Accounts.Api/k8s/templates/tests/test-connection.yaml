@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "cerber-accounts-api.fullname" . }}-test-connection"
+  labels:
+    {{- include "cerber-accounts-api.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "cerber-accounts-api.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

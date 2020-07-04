@@ -58,6 +58,7 @@ namespace Accounts.Api
                 });
             });
 
+            services.AddHealthChecks();
             services.AddCors();
             services.AddControllers();
         }
@@ -101,6 +102,7 @@ namespace Accounts.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }
