@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  cerber-gateway-api:
+    image: ppasekdevcontainers.azurecr.io/cerber-gateway-api
+    build:
+      context: .
+      dockerfile: Services/Gateway/Gateway.Api/Dockerfile
+    depends_on:
+        - cerber-accounts-api
+        - cerber-availability-api
+
+  cerber-accounts-api:
+    image: ppasekdevcontainers.azurecr.io/cerber-accounts-api
+    build:
+      context: .
+      dockerfile: Services/Accounts/Accounts.Api/Dockerfile
+
+  cerber-availability-api:
+    image: ppasekdevcontainers.azurecr.io/cerber-availability-api
+    build:
+      context: .
+      dockerfile: Services/Availability/Availability.Api/Dockerfile
+
+
+  cerber-availability-worker:
+    image: ppasekdevcontainers.azurecr.io/cerber-availability-worker
+    build:
+      context: .
+      dockerfile: Services/Availability/Availability.Worker/Dockerfile

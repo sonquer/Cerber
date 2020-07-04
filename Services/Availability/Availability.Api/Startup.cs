@@ -11,6 +11,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -109,24 +110,36 @@ namespace Availability.Api
                     };
                 });
 
-            
+            services.AddHealthChecks();
+            services.AddCors();
             services.AddControllers();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var basePath = Configuration["Docker:BasePath"];
+            if (string.IsNullOrEmpty(basePath) == false)
+            {
+                app.Use((context, next) => {
+                    context.Request.PathBase = new PathString(basePath);
+                    return next();
+                });
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             
-            app.UseSwagger();
-            
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cerber Availability Api");
+            app.UseSwagger(c => {
+                c.RouteTemplate = "swagger/{documentName}/swagger.json";
             });
-            
+
+            app.UseSwaggerUI(c => {
+                c.RoutePrefix = "swagger";
+                c.SwaggerEndpoint("./v1/swagger.json", "Cerber Availability Api");
+            });
+
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
@@ -135,8 +148,6 @@ namespace Availability.Api
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
@@ -144,6 +155,7 @@ namespace Availability.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }

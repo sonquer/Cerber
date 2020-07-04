@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+
+  cerber-gateway-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - GATEWAYAPI_Docker__BasePath=gateway
+    ports:
+      - "5001:80"
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+
+  cerber-accounts-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - ACCOUNTSAPI_Docker__BasePath=/gateway/accounts/
+    ports:
+      - "80"
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+
+  cerber-availability-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - AVAILABILITYAPI_Docker__BasePath=/gateway/availability/
+    ports:
+      - "80"
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+
+  cerber-availability-worker:
