@@ -27,17 +27,42 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Production
+          - name: AVAILABILITYAPI_Docker__BasePath
+            value: /gateway/availability/
+          - name: Token__Key
+            valueFrom:
+              secretKeyRef:
+                name: token
+                key: key
+          - name: Cosmos__Endpoint
+            valueFrom:
+              secretKeyRef:
+                name: cosmos
+                key: endpoint
+          - name: Cosmos__Key
+            valueFrom:
+              secretKeyRef:
+                name: cosmos
+                key: key
+          - name: Cosmos__DatabaseName
+            valueFrom:
+              secretKeyRef:
+                name: cosmos
+                key: database-name
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /health
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /health
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

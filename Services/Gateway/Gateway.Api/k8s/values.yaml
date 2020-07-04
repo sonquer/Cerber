@@ -8,7 +8,8 @@ image:
   repository: ppasekdevcontainers.azurecr.io/cerber-gateway-api
   pullPolicy: Always
 
-imagePullSecrets: []
+imagePullSecrets: 
+  - name: azurecr
 nameOverride: "cerber-gateway-api"
 fullnameOverride: "cerber-gateway-api"
 

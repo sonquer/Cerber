@@ -8,7 +8,8 @@ image:
   repository: ppasekdevcontainers.azurecr.io/cerber-availability-api
   pullPolicy: Always
 
-imagePullSecrets: []
+imagePullSecrets: 
+  - name: azurecr
 nameOverride: "cerber-availability-api"
 fullnameOverride: "cerber-availability-api"
 

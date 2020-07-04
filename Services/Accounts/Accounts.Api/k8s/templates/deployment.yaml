@@ -27,6 +27,31 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Production
+          - name: ACCOUNTSAPI_Docker__BasePath
+            value: /gateway/accounts/
+          - name: Token__Key
+            valueFrom:
+              secretKeyRef:
+                name: token
+                key: key
+          - name: Cosmos__Endpoint
+            valueFrom:
+              secretKeyRef:
+                name: cosmos
+                key: endpoint
+          - name: Cosmos__Key
+            valueFrom:
+              secretKeyRef:
+                name: cosmos
+                key: key
+          - name: Cosmos__DatabaseName
+            valueFrom:
+              secretKeyRef:
+                name: cosmos
+                key: database-name
           ports:
             - name: http
               containerPort: 80
