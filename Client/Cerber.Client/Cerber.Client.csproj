@@ -7,6 +7,7 @@
     <PackageReference Include="NSwag.ApiDescription.Client" Version="13.0.5" />
   </ItemGroup>
   <ItemGroup>
-    <OpenApiReference Include="swagger.json" SourceUrl="https://cluster.cerber.space/gateway/availability/swagger/v1/swagger.json" />
+    <OpenApiReference Include="Accounts.json" SourceUrl="https://cluster.cerber.space/gateway/accounts/swagger/v1/swagger.json" />
+    <OpenApiReference Include="Availability.json" SourceUrl="https://cluster.cerber.space/gateway/availability/swagger/v1/swagger.json" />
   </ItemGroup>
 </Project>
