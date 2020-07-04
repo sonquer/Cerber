@@ -12,7 +12,7 @@
                   ItemTapped="Handle_ItemTapped"
                   CachingStrategy="RecycleElement"
                   RowHeight="75"
-                  Margin="15">
+                  Margin="10,10,10,10">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
