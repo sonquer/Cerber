@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Accounts.Domain.AggregateModels.AccountAggregate;
@@ -25,14 +24,6 @@ namespace Accounts.Infrastructure.Repository
             await _accountsContext.Accounts.AddAsync(account, cancellationToken)
                 .ConfigureAwait(false);
             
-            return account;
-        }
-
-        public async Task<Account> GetById(Guid id, CancellationToken cancellationToken)
-        {
-            var account = await _accountsContext.Accounts.FirstOrDefaultAsync(e => e.Id == id, cancellationToken)
-                .ConfigureAwait(false);
-
             return account;
         }
 

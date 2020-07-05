@@ -11,11 +11,8 @@ namespace Accounts.Infrastructure
 {
     public class AccountsContext : DbContext, IUnitOfWork
     {
-        private readonly IMediator _mediator;
-        
-        public AccountsContext(DbContextOptions<AccountsContext> options, IMediator mediator) : base(options)
+        public AccountsContext(DbContextOptions<AccountsContext> options) : base(options)
         {
-            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
             System.Diagnostics.Debug.WriteLine($"{nameof(AccountsContext)}::ctor");
         }
 
@@ -30,8 +27,6 @@ namespace Accounts.Infrastructure
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
-            await _mediator.DispatchDomainEventsAsync(this);
-            
             await base.SaveChangesAsync(cancellationToken);
 
             return true;

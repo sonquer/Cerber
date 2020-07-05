@@ -25,15 +25,13 @@ namespace Accounts.UnitTests.Application.Services
                 .UseInMemoryDatabase(nameof(JwtAuthorizationServiceTest))
                 .Options;
             
-            var mediator = new Mock<IMediator>();
-            
             var configuration = new Mock<IConfiguration>();
             configuration.Setup(e => e[It.IsAny<string>()])
                 .Returns("SeCrEtKeYSeCrEtKeYSeCrEtKeYSeCrEtKeYSeCrEtKeY");
 
             _configuration = configuration.Object;
             
-            _databaseContext = new AccountsContext(options, mediator.Object);
+            _databaseContext = new AccountsContext(options);
         }
         
         [Fact]

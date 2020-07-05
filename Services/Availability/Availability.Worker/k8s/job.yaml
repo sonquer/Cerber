@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cerber-availability-worker
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+      - name: azurecr
+      containers:
+      - name: cerber-availability-worker
+        image: ppasekdevcontainers.azurecr.io/cerber-availability-worker
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        - name: Cosmos__Endpoint
+          valueFrom:
+            secretKeyRef:
+              name: cosmos
+              key: endpoint
+        - name: Cosmos__Key
+          valueFrom:
+            secretKeyRef:
+              name: cosmos
+              key: key
+        - name: Cosmos__DatabaseName
+          valueFrom:
+            secretKeyRef:
+              name: cosmos
+              key: database-name
+      restartPolicy: OnFailure
+  backoffLimit: 4

@@ -1,0 +1,31 @@
+﻿{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/gateway/accounts/{rest}",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+
+      "DownstreamPathTemplate": "/{rest}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cerber-accounts-api",
+          "Port": 80
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/availability/{rest}",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+
+      "DownstreamPathTemplate": "/{rest}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cerber-availability-api",
+          "Port": 80
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {}
+}

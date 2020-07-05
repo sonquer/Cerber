@@ -5,9 +5,7 @@ using Accounts.Api.Application.Commands.Accounts;
 using Accounts.Domain.AggregateModels.AccountAggregate;
 using Accounts.Infrastructure;
 using Accounts.Infrastructure.Repository;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using Xunit;
 
 namespace Accounts.UnitTests.Application.Commands.Accounts
@@ -18,13 +16,11 @@ namespace Accounts.UnitTests.Application.Commands.Accounts
         
         public CreateAccountCommandHandlerTest()
         {
-            var mediator = new Mock<IMediator>();
-            
             var options = new DbContextOptionsBuilder<AccountsContext>()
                 .UseInMemoryDatabase(nameof(CreateAccountCommandHandlerTest))
                 .Options;
-            
-            var accountContext = new AccountsContext(options, mediator.Object);
+
+            var accountContext = new AccountsContext(options);
             
             _accountRepository = new AccountRepository(accountContext);
         }
@@ -34,7 +30,8 @@ namespace Accounts.UnitTests.Application.Commands.Accounts
         {
             var createAccountCommandHandler = new CreateAccountCommandHandler(_accountRepository);
 
-            var accountId = await createAccountCommandHandler.Handle(new CreateAccountCommand("test", "password"), CancellationToken.None)
+            var accountId = await createAccountCommandHandler
+                .Handle(new CreateAccountCommand("test", "password"), CancellationToken.None)
                 .ConfigureAwait(false);
             
             Assert.True(Guid.TryParse(accountId.ToString(), out var unused));

@@ -17,6 +17,11 @@ namespace Accounts.Api.Application.Commands.Accounts
         
         public async Task<Guid> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
+            if (await _accountRepository.GetByEmail(request.Email, cancellationToken) != null)
+            {
+                throw new InvalidOperationException("Account already exists.");
+            }
+
             var account = new Account(request.Email, request.Password);
 
             await _accountRepository.AddAsync(account, cancellationToken)
