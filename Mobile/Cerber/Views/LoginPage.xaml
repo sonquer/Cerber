@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Cerber.Views.LoginPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Username"
+                   Margin="30,200,30,10"/>
+            <Entry Placeholder="Password"
+                   IsPassword="true"
+                   Margin="30,0,30,30"/>
+            <Button Style="{StaticResource LoginButton}"
+                    Text="Login"/>
+            <Button Text="Create your account"
+                   Margin="230,0,0,0" 
+                   FontSize="11"
+                   TextColor="#000080"
+                   BackgroundColor="Transparent"
+                   BorderColor="Transparent"
+                   BorderWidth="0"
+                   Clicked="Button_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

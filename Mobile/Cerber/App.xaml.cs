@@ -9,7 +9,7 @@ namespace Cerber
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new ServicesListPage());
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()
