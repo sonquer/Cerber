@@ -32,7 +32,6 @@ namespace Availability.Domain.AggregateModels.AvailabilityRecordAggregate
             string expectedResponse,
             int logLifetimeThresholdInHours)
         {
-            PartitionKey = Guid.NewGuid();
             Id = Guid.NewGuid();
             AccountId = accountId;
             Name = name;
@@ -49,6 +48,11 @@ namespace Availability.Domain.AggregateModels.AvailabilityRecordAggregate
 
         public AvailabilityLog AppendLog(int statusCode, string body, long responseTime)
         {
+            if (AvailabilityLogs is null)
+            {
+                AvailabilityLogs = new List<AvailabilityLog>();
+            }
+
             var availabilityLog = new AvailabilityLog(DateTime.UtcNow, statusCode, body, responseTime);
             
             AvailabilityLogs.Add(availabilityLog);
@@ -63,6 +67,11 @@ namespace Availability.Domain.AggregateModels.AvailabilityRecordAggregate
 
         private string GetStatus()
         {
+            if (AvailabilityLogs is null)
+            {
+                return "ST_OK";
+            }
+
             if (AvailabilityLogs.Any() == false)
             {
                 return "ST_OK";
@@ -78,6 +87,35 @@ namespace Availability.Domain.AggregateModels.AvailabilityRecordAggregate
             }
 
             return "ST_OK";
+        }
+
+        public void UpdateName(string name)
+        {
+            Name = name;
+        }
+
+        public void UpdateUrl(string url)
+        {
+            Url = url;
+
+            AvailabilityLogs = new List<AvailabilityLog>();
+        }
+
+        public void UpdateExpectedResponse(string  expectedResponse)
+        {
+            ExpectedResponse = expectedResponse;
+        }
+
+        public void UpdateExpectedStatusCode(int expectedStatusCode)
+        {
+            ExpectedStatusCode = expectedStatusCode;
+        }
+
+        public void UpdateLogLifetimeThresholdInHours(int logLifetimeThresholdInHours)
+        {
+            LogLifetimeThresholdInHours = logLifetimeThresholdInHours;
+
+            ClearOutdatedLogs();
         }
     }
 }

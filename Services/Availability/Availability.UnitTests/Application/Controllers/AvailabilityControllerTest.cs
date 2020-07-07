@@ -22,7 +22,35 @@ namespace Availability.UnitTests.Application.Controllers
             var availabilityController = new AvailabilityController(mediator.Object);
 
             var response = await availabilityController
-                .CreateAvailabilityRecord(new AvailabilityRecordDto(), CancellationToken.None)
+                .CreateAvailabilityRecord(new CreateAvailabilityRecordDto
+                {
+                    Name = "testName",
+                    Url = "http://google.com/",
+                    ExpectedResponse = "{}",
+                    ExpectedStatusCode = 200,
+                    LogLifetimeThresholdInHours = 3
+                }, CancellationToken.None)
+                .ConfigureAwait(false);
+
+            Assert.IsAssignableFrom<NoContentResult>(response);
+        }
+        
+        [Fact]
+        public async Task AvailabilityController_UpdateAvailabilityRecord_AvailabilityRecordUpdated()
+        {
+            var mediator = new Mock<IMediator>();
+            var availabilityController = new AvailabilityController(mediator.Object);
+
+            var response = await availabilityController
+                .UpdateAvailabilityRecord(new UpdateAvailabilityRecordDto
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "testName",
+                    Url = "http://google.com/",
+                    ExpectedResponse = "{}",
+                    ExpectedStatusCode = 200,
+                    LogLifetimeThresholdInHours = 3
+                }, CancellationToken.None)
                 .ConfigureAwait(false);
 
             Assert.IsAssignableFrom<NoContentResult>(response);

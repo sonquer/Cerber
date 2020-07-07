@@ -34,11 +34,12 @@ namespace Availability.Api
         {
             services.AddDbContext<AvailabilityContext>(options =>
             {
-                var accountEndpoint = Configuration["Cosmos:Endpoint"];
-                var accountKey = Configuration["Cosmos:Key"];
-                var databaseName = Configuration["Cosmos:DatabaseName"];
-                
-                options.UseCosmos(accountEndpoint, accountKey, databaseName);
+                var cerber = Configuration.GetConnectionString("Cerber");
+                options.UseNpgsql(cerber, options =>
+                {
+                    options.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                    options.MigrationsHistoryTable("migrations_history", AvailabilityContext.AVAILABILITY_SCHEMA);
+                });
             });
             
             services.AddSingleton<IClaimConverter, UserClaimConverter>()

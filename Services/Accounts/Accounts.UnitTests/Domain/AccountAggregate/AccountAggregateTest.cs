@@ -12,7 +12,6 @@ namespace Accounts.UnitTests.Domain.AccountAggregate
             var account = new Account("test@hotmail.com", "password");
 
             Assert.True(IsValidGuid(account.Id));
-            Assert.True(IsValidGuid(account.PartitionKey));
             Assert.Equal("test@hotmail.com", account.Email);
             Assert.Equal(DateTime.UtcNow.Date, account.CreatedAt.Date);
             Assert.Equal(DateTime.UtcNow.Date, account.UpdatedAt.Date);
@@ -28,7 +27,6 @@ namespace Accounts.UnitTests.Domain.AccountAggregate
             account.UpdateModification();
             
             Assert.True(IsValidGuid(account.Id));
-            Assert.True(IsValidGuid(account.PartitionKey));
             Assert.Equal("test@hotmail.com", account.Email);
             Assert.Equal(DateTime.UtcNow.Date, account.CreatedAt.Date);
             Assert.Equal(DateTime.UtcNow.Date, account.UpdatedAt.Date);

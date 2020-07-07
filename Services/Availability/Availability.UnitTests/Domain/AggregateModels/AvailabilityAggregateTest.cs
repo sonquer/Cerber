@@ -19,7 +19,6 @@ namespace Availability.UnitTests.Domain.AggregateModels
                 1);
             
             Assert.True(IsValidGuid(availabilityRecord.Id));
-            Assert.True(IsValidGuid(availabilityRecord.PartitionKey));
             Assert.Equal(accountId, availabilityRecord.AccountId);
             Assert.Equal("test name", availabilityRecord.Name);
             Assert.Equal("http://google.com", availabilityRecord.Url);
@@ -42,6 +41,81 @@ namespace Availability.UnitTests.Domain.AggregateModels
                 1);
             
             Assert.True(availabilityRecord.HasExpectedResponse);
+        }
+        
+        [Fact]
+        public void Availability_UpdateExpectedResponse_ExpectedResponseChanged()
+        {
+            var availabilityRecord = new AvailabilityRecord(Guid.NewGuid(), 
+                "test name",
+                "http://google.com", 
+                200, 
+                "{}",
+                1);
+            
+            availabilityRecord.UpdateExpectedResponse("test");
+            
+            Assert.Equal("test", availabilityRecord.ExpectedResponse);
+        }
+        
+        [Fact]
+        public void Availability_UpdateExpectedStatus_ExpectedStatusChanged()
+        {
+            var availabilityRecord = new AvailabilityRecord(Guid.NewGuid(), 
+                "test name",
+                "http://google.com", 
+                200, 
+                "{}",
+                1);
+            
+            availabilityRecord.UpdateExpectedStatusCode(500);
+            
+            Assert.Equal(500, availabilityRecord.ExpectedStatusCode);
+        }
+        
+        [Fact]
+        public void Availability_UpdateLogLifetimeThresholdInHours_LogLifetimeThresholdInHoursChanged()
+        {
+            var availabilityRecord = new AvailabilityRecord(Guid.NewGuid(), 
+                "test name",
+                "http://google.com", 
+                200, 
+                "{}",
+                1);
+            
+            availabilityRecord.UpdateLogLifetimeThresholdInHours(1);
+            
+            Assert.Equal(1, availabilityRecord.LogLifetimeThresholdInHours);
+        }
+        
+        [Fact]
+        public void Availability_UpdateName_NameChanged()
+        {
+            var availabilityRecord = new AvailabilityRecord(Guid.NewGuid(), 
+                "test name",
+                "http://google.com", 
+                200, 
+                "{}",
+                1);
+            
+            availabilityRecord.UpdateName("new name");
+            
+            Assert.Equal("new name", availabilityRecord.Name);
+        }
+        
+        [Fact]
+        public void Availability_UpdateUrl_UrlChanged()
+        {
+            var availabilityRecord = new AvailabilityRecord(Guid.NewGuid(), 
+                "test name",
+                "http://google.com", 
+                200, 
+                "{}",
+                1);
+            
+            availabilityRecord.UpdateUrl("http://github.com/");
+            
+            Assert.Equal("http://github.com/", availabilityRecord.Url);
         }
         
         [Fact]

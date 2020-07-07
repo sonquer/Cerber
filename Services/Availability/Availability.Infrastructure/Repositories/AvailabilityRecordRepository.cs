@@ -43,6 +43,7 @@ namespace Availability.Infrastructure.Repositories
         public async Task<AvailabilityRecord> GetById(Guid id, CancellationToken cancellationToken)
         {
             return await _availabilityContext.AvailabilityRecords
+                .Include(e => e.AvailabilityLogs)
                 .FirstOrDefaultAsync(e => e.Id == id, cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -50,6 +51,7 @@ namespace Availability.Infrastructure.Repositories
         public async Task<List<AvailabilityRecord>> GetByAccountId(Guid accountId, CancellationToken cancellationToken)
         {
             return await _availabilityContext.AvailabilityRecords
+                .Include(e => e.AvailabilityLogs)
                 .Where(e => e.AccountId == accountId)
                 .ToListAsync(cancellationToken)
                 .ConfigureAwait(false);

@@ -16,7 +16,6 @@ namespace Accounts.Domain.AggregateModels.AccountAggregate
 
         public Account(string email, string password)
         {
-            PartitionKey = Guid.NewGuid();
             Id = Guid.NewGuid();
             Email = email;
             HashedPassword = SecurePasswordHasherHelper.Hash(password);

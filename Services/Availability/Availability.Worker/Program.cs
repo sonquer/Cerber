@@ -8,7 +8,6 @@ using Availability.Worker.Application.Services.Availability;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -23,24 +22,18 @@ namespace Availability.Worker
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((hostContext, builder) =>
+                .ConfigureAppConfiguration((hostBuilderContext, configuration) =>
                 {
-                    if (hostContext.HostingEnvironment.IsDevelopment())
-                    {
-                        var env = hostContext.HostingEnvironment;
-                        var appAssembly = Assembly.Load(new AssemblyName(env.ApplicationName));
-                        builder.AddUserSecrets(appAssembly, true);
-                    }
+                    configuration.AddJsonFile("appsettings.json", false)
+                        .AddJsonFile($"appsettings.{hostBuilderContext.HostingEnvironment.EnvironmentName}.json", true)
+                        .AddEnvironmentVariables("AVAILABILITY_WORKER_");
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddDbContext<AvailabilityContext>(options =>
                     {
-                        var accountEndpoint = hostContext.Configuration["Cosmos:Endpoint"];
-                        var accountKey = hostContext.Configuration["Cosmos:Key"];
-                        var databaseName = hostContext.Configuration["Cosmos:DatabaseName"];
-                
-                        options.UseCosmos(accountEndpoint, accountKey, databaseName);
+                        var cerber = hostContext.Configuration.GetConnectionString("Cerber");
+                        options.UseNpgsql(cerber);
                     });
                     
                     services.AddScoped<IAvailabilityProcessor, AvailabilityProcessor>()
