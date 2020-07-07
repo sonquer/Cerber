@@ -37,7 +37,7 @@ namespace Availability.Infrastructure.EntityTypeConfigurations
 
             builder.HasIndex(e => e.AccountId)
                 .HasName("ix_availiability_recrods_account_id")
-                .IsUnique();
+                .IsUnique(false);
 
             builder.HasMany(e => e.AvailabilityLogs)
                 .WithOne()

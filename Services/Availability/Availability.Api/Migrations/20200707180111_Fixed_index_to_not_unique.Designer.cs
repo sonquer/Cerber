@@ -3,15 +3,17 @@ using System;
 using Availability.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Availability.Api.Migrations
 {
     [DbContext(typeof(AvailabilityContext))]
-    partial class AvailabilityContextModelSnapshot : ModelSnapshot
+    [Migration("20200707180111_Fixed_index_to_not_unique")]
+    partial class Fixed_index_to_not_unique
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
