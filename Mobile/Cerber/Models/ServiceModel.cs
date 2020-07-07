@@ -1,10 +1,10 @@
-﻿using Xamarin.Forms;
+﻿using System;
 
 namespace Cerber.Models
 {
     public class ServiceModel
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 

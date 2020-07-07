@@ -12,7 +12,10 @@
                   ItemTapped="Handle_ItemTapped"
                   CachingStrategy="RecycleElement"
                   RowHeight="75"
-                  Margin="10,10,10,10">
+                  Margin="10,10,10,10"
+                  RefreshCommand="{Binding RefreshServicesCommand}"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsRefreshing}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

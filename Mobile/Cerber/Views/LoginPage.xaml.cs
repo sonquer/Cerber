@@ -1,4 +1,6 @@
-﻿using Cerber.ViewModels;
+﻿using Cerber.Models;
+using Cerber.Repository;
+using Cerber.ViewModels;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,12 +16,21 @@ namespace Cerber.Views
         {
             InitializeComponent();
 
-            BindingContext = new LoginViewModel(Navigation);
+            BindingContext = new LoginViewModel(Navigation, DependencyService.Resolve<IRepository>());
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void Create_Account_Clicked(object sender, EventArgs e)
         {
             _viewModel.GoToRegistrationCommand.Execute(null);
+        }
+
+        private void Login_Clicked(object sender, EventArgs e)
+        {
+            _viewModel.LoginCommand.Execute(new LoginModel
+            {
+                Email = email.Text,
+                Password = password.Text
+            });
         }
     }
 }

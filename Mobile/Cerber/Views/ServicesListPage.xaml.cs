@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Cerber.Models;
+using Cerber.Repository;
 using Cerber.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -9,8 +10,6 @@ namespace Cerber.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ServicesListPage : ContentPage
     {
-        public ObservableCollection<ServiceModel> Services { get; set; }
-
         private ServicesListViewModel _viewModel => BindingContext as ServicesListViewModel;
 
         public ServicesListPage()
@@ -19,29 +18,7 @@ namespace Cerber.Views
 
             BindingContext = new ServicesListViewModel(Navigation);
 
-            Services = new ObservableCollection<ServiceModel>
-            {
-                new ServiceModel
-                {
-                    Id = "1",
-                    Name = "Main.Api",
-                    Image = "ok.png"
-                },
-                new ServiceModel
-                {
-                    Id = "2",
-                    Name = "Import.Api",
-                    Image = "ok.png"
-                },
-                new ServiceModel
-                {
-                    Id = "3",
-                    Name = "Search.Api",
-                    Image = "error.png"
-                }
-            };
-
-            ServicesListView.ItemsSource = Services;
+            _viewModel.RefreshServicesCommand.Execute(null);
         }
 
         void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

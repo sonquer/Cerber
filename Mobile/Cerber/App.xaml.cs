@@ -1,15 +1,35 @@
-﻿using Cerber.Views;
+﻿using Autofac;
+using Cerber.Repository;
+using Cerber.Views;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace Cerber
 {
     public partial class App : Application
     {
+        static IContainer container;
+
+        static readonly ContainerBuilder builder = new ContainerBuilder();
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginPage());
+            RegisterSingletonType<IRepository, CerberDatabaseContext>();
+            BuildContainer();
+
+            DependencyResolver.ResolveUsing(type => container.IsRegistered(type) ? container.Resolve(type) : null);
+
+            var repository = DependencyService.Resolve<IRepository>();
+            if (repository.GetToken() != null)
+            {
+                MainPage = new NavigationPage(new ServicesListPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
         }
 
         protected override void OnStart()
@@ -22,6 +42,21 @@ namespace Cerber
 
         protected override void OnResume()
         {
+        }
+
+        protected static void RegisterType<TInterface, T>() where TInterface : class where T : class, TInterface
+        {
+            builder.RegisterType<T>().As<TInterface>();
+        }
+
+        protected static void RegisterSingletonType<TInterface, T>() where TInterface : class where T : class, TInterface
+        {
+            builder.RegisterType<T>().As<TInterface>().SingleInstance();
+        }
+
+        protected static void BuildContainer()
+        {
+            container = builder.Build();
         }
     }
 }
