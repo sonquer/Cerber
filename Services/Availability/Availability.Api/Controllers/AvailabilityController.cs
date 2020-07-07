@@ -23,18 +23,33 @@ namespace Availability.Api.Controllers
         
         [HttpPost]
         [ProducesResponseType(204)]
-        public async Task<IActionResult> CreateAvailabilityRecord([FromBody] AvailabilityRecordDto availabilityRecordDto, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateAvailabilityRecord([FromBody] CreateAvailabilityRecordDto createAvailabilityRecordDto, CancellationToken cancellationToken)
         {
             await _mediator.Publish(new CreateAvailabilityRecordCommand(User,
-                availabilityRecordDto.Name,
-                availabilityRecordDto.Url,
-                availabilityRecordDto.ExpectedStatusCode,
-                availabilityRecordDto.ExpectedResponse,
-                availabilityRecordDto.LogLifetimeThresholdInHours), cancellationToken).ConfigureAwait(false);
+                createAvailabilityRecordDto.Name,
+                createAvailabilityRecordDto.Url,
+                createAvailabilityRecordDto.ExpectedStatusCode,
+                createAvailabilityRecordDto.ExpectedResponse,
+                createAvailabilityRecordDto.LogLifetimeThresholdInHours), cancellationToken).ConfigureAwait(false);
 
             return NoContent();
         }
-        
+
+        [HttpPut]
+        [ProducesResponseType(204)]
+        public async Task<IActionResult> UpdateAvailabilityRecord([FromBody] UpdateAvailabilityRecordDto updateAvailabilityRecordDto, CancellationToken cancellationToken)
+        {
+            await _mediator.Publish(new UpdateAvailabilityRecordCommand(User,
+                updateAvailabilityRecordDto.Id,
+                updateAvailabilityRecordDto.Name,
+                updateAvailabilityRecordDto.Url,
+                updateAvailabilityRecordDto.ExpectedStatusCode,
+                updateAvailabilityRecordDto.ExpectedResponse,
+                updateAvailabilityRecordDto.LogLifetimeThresholdInHours), cancellationToken).ConfigureAwait(false);
+
+            return NoContent();
+        }
+
         [HttpGet]
         [ProducesResponseType(typeof(List<AvailabilityListItemDto>), 200)]
         public async Task<IActionResult> GetAvailabilityListItems(CancellationToken cancellationToken)

@@ -32,7 +32,7 @@ namespace Availability.Worker.Application.Commands
             {
                 MaxDegreeOfParallelism = 8,
                 CancellationToken = cancellationToken
-            },availabilityRecordId =>
+            }, availabilityRecordId =>
             {
                 _availabilityProcessor.ProcessAvailabilityRecord(availabilityRecordId, cancellationToken)
                     .GetAwaiter()

@@ -2,10 +2,20 @@ version: '3.4'
 
 services:
 
+  db:
+    environment:
+      POSTGRES_PASSWORD: p31nfcczabkriu51az
+      POSTGRES_DB: cerber
+    ports:
+      - "5432:5432"
+    volumes:
+    - db-data:/var/lib/postgresql/data
+
   cerber-gateway-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
+      - GATEWAYAPI_Docker__BasePath=gateway
     ports:
       - "5001:80"
     volumes:
@@ -17,8 +27,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
       - ACCOUNTSAPI_Docker__BasePath=/gateway/accounts/
+      - ACCOUNTSAPI_ConnectionStrings__Cerber=User ID=postgres; Password=p31nfcczabkriu51az; Host=db; Port=5432; Database=accounts;
+      - ACCOUNTSAPI_Token__Key=ancznwawenanwhurhu1231guczb
     ports:
-      - "80"
+      - "5002:80"
     volumes:
       - ~/.aspnet/https:/root/.aspnet/https:ro
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
@@ -28,10 +40,17 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
       - AVAILABILITYAPI_Docker__BasePath=/gateway/availability/
+      - AVAILABILITYAPI_ConnectionStrings__Cerber=User ID=postgres; Password=p31nfcczabkriu51az; Host=db; Port=5432; Database=availability;
+      - AVAILABILITYAPI_Token__Key=ancznwawenanwhurhu1231guczb
     ports:
-      - "80"
+      - "5003:80"
     volumes:
       - ~/.aspnet/https:/root/.aspnet/https:ro
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
 
   cerber-availability-worker:
+    environment:
+      - AVAILABILITY_WORKER_ConnectionStrings__Cerber=User ID=postgres; Password=p31nfcczabkriu51az; Host=db; Port=5432; Database=availability;
+
+volumes:
+  db-data:

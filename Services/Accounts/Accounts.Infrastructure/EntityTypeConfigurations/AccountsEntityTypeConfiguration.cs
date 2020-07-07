@@ -1,7 +1,6 @@
 using Accounts.Domain.AggregateModels.AccountAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Accounts.Infrastructure.EntityTypeConfigurations
 {
@@ -9,23 +8,29 @@ namespace Accounts.Infrastructure.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<Account> builder)
         {
-            builder.ToContainer("Accounts");
+            builder.ToTable("accounts", AccountsContext.ACCOUNTS_SCHEMA);
             
-            builder.HasNoDiscriminator();
-            
-            var converter = new GuidToStringConverter();
-            
-            builder.HasPartitionKey(e => e.PartitionKey);
+            builder.HasKey(e => e.Id)
+                .HasName("pk_accounts_id");
 
-            builder.Property(e => e.PartitionKey)
-                .HasConversion(converter)
-                .ValueGeneratedNever();
-            
             builder.Property(e => e.Id)
-                .HasConversion(converter)
+                .HasColumnName("id")
                 .ValueGeneratedNever();
+
+            builder.Property(e => e.Email)
+                .HasColumnName("email");
+
+            builder.Property(e => e.HashedPassword)
+                .HasColumnName("hashed_password");
+
+            builder.Property(e => e.CreatedAt)
+                .HasColumnName("created_at");
+
+            builder.Property(e => e.UpdatedAt)
+                .HasColumnName("updated_at");
 
             builder.HasIndex(e => e.Email)
+                .HasName("ix_acounts_email")
                 .IsUnique();
         }
     }
