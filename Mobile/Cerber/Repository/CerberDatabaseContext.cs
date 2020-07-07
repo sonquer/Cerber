@@ -18,6 +18,11 @@ namespace Cerber.Repository
 
         public Token GetToken()
         {
+            if (_SQLiteConnection.Table<Token>().Count() <= 0)
+            {
+                return null;
+            }
+
             return _SQLiteConnection.Get<Token>(e => true);
         }
 
