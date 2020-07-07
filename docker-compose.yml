@@ -1,6 +1,10 @@
 version: '3.4'
 
 services:
+  db:
+    image: postgres
+    restart: always
+
   cerber-gateway-api:
     image: ppasekdevcontainers.azurecr.io/cerber-gateway-api
     build:
@@ -15,16 +19,21 @@ services:
     build:
       context: .
       dockerfile: Services/Accounts/Accounts.Api/Dockerfile
+    depends_on:
+        - db
 
   cerber-availability-api:
     image: ppasekdevcontainers.azurecr.io/cerber-availability-api
     build:
       context: .
       dockerfile: Services/Availability/Availability.Api/Dockerfile
-
+    depends_on:
+        - db
 
   cerber-availability-worker:
     image: ppasekdevcontainers.azurecr.io/cerber-availability-worker
     build:
       context: .
       dockerfile: Services/Availability/Availability.Worker/Dockerfile
+    depends_on:
+        - db

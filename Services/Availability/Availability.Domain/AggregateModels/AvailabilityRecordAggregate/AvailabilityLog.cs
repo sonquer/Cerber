@@ -1,8 +1,9 @@
 using System;
+using Availability.Domain.SeedWork;
 
 namespace Availability.Domain.AggregateModels.AvailabilityRecordAggregate
 {
-    public class AvailabilityLog
+    public class AvailabilityLog : Entity
     {
         public DateTime CreatedAt { get; protected set; }
         
@@ -17,9 +18,10 @@ namespace Availability.Domain.AggregateModels.AvailabilityRecordAggregate
             string body, 
             long responseTime)
         {
+            Id = Guid.NewGuid();
             CreatedAt = createdAt;
             StatusCode = statusCode;
-            Body = body;
+            Body = body?.Trim();
             ResponseTime = responseTime;
         }
 

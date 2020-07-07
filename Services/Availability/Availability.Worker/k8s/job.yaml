@@ -13,20 +13,10 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Production
-        - name: Cosmos__Endpoint
+        - name: ConnectionStrings__Cerber
           valueFrom:
             secretKeyRef:
-              name: cosmos
-              key: endpoint
-        - name: Cosmos__Key
-          valueFrom:
-            secretKeyRef:
-              name: cosmos
-              key: key
-        - name: Cosmos__DatabaseName
-          valueFrom:
-            secretKeyRef:
-              name: cosmos
-              key: database-name
+              name: connection-strings
+              key: cerber-availability
       restartPolicy: OnFailure
   backoffLimit: 4

@@ -35,5 +35,9 @@ spec:
           backend:
             serviceName: cerber-gateway-api
             servicePort: 80
+        - path: /pgadmin/
+          backend:
+            serviceName: pgadmin
+            servicePort: 80
   {{- end }}
 {{- end }}
