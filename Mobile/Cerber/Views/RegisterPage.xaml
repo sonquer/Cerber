@@ -16,6 +16,7 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
+            <Label Text="{Binding RegisterError}" />
             <Grid Margin="30,200,30,30" VerticalOptions="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -24,19 +25,26 @@
                 </Grid.RowDefinitions>
 
                 <StackLayout Grid.Row="0">
-                    <Entry Placeholder="User Name"/>
+                    <Entry Placeholder="User Name"
+                           x:Name="email"/>
                 </StackLayout>
 
                 <StackLayout Grid.Row="1">
-                    <Entry Placeholder="Password" IsPassword="true"/>
+                    <Entry Placeholder="Password" 
+                           IsPassword="true"
+                           x:Name="password"/>
                 </StackLayout>
 
                 <StackLayout Grid.Row="2">
-                    <Entry Placeholder="Confirm Password" IsPassword="true"/>
+                    <Entry Placeholder="Confirm Password" 
+                           IsPassword="true"
+                           x:Name="confirmPassword"/>
                 </StackLayout>
             </Grid>
             <Button Style="{StaticResource RegisterButton}"
-                    Text="Register" />
+                    Text="Register"
+                    Clicked="Register_Clicked" 
+                    IsEnabled="{Binding RegisterButtonIsEnabled}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

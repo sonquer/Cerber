@@ -25,7 +25,8 @@
                    Margin="30,0,30,30"/>
             <Button Style="{StaticResource LoginButton}"
                     Text="Login"
-                    Clicked="Login_Clicked"/>
+                    Clicked="Login_Clicked"
+                    IsEnabled="{Binding LoginButtonIsEnabled}"/>
             <Button Text="Create your account"
                    Margin="230,0,0,0" 
                    FontSize="11"
@@ -33,7 +34,7 @@
                    BackgroundColor="Transparent"
                    BorderColor="Transparent"
                    BorderWidth="0"
-                   Clicked="Create_Account_Clicked"/>
+                   Clicked="Create_Account_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

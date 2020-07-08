@@ -20,6 +20,19 @@ namespace Cerber.ViewModels
             set => SetProperty(ref _loginError, value);
         }
 
+        private bool _isLoading = false;
+
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set => SetProperty(ref _isLoading, value);
+        }
+
+        public bool LoginButtonIsEnabled
+        {
+            get => _isLoading == false;
+        }
+
         private readonly INavigation _navigation;
 
         private readonly IRepository _repository;
@@ -64,6 +77,8 @@ namespace Cerber.ViewModels
 
             try
             {
+                IsLoading = true;
+
                 var result = await accountsClient.AuthorizeAsync(new AccountDto()
                 {
                     Email = model.Email,
@@ -76,10 +91,13 @@ namespace Cerber.ViewModels
                     ExpiresAt = result.ExpiresAt.ToString()
                 });
 
+                IsLoading = false;
+
                 Application.Current.MainPage = new NavigationPage(new ServicesListPage());
             }
             catch (Exception)
             {
+                IsLoading = false;
                 LoginError = "Invalid email or password";
             }
         }

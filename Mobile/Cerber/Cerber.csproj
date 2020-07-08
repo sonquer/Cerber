@@ -30,7 +30,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Components\" />
     <Folder Include="Repository\" />
     <Folder Include="Repository\Models\" />
