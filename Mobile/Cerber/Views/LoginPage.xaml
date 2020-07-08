@@ -15,14 +15,17 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding LoginError}" />
             <Entry Placeholder="Email"
                    x:Name="email"
                    Margin="30,200,30,10"/>
             <Entry Placeholder="Password"
                    x:Name="password"
                    IsPassword="true"
-                   Margin="30,0,30,30"/>
+                   Margin="30,0,30,0"/>
+            <Label Text="{Binding LoginError}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   TextColor="MediumVioletRed"/>
             <Button Style="{StaticResource LoginButton}"
                     Text="Login"
                     Clicked="Login_Clicked"

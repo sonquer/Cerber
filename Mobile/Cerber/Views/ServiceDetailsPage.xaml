@@ -13,34 +13,40 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
-            <Image
-                HeightRequest="64"
-                Margin="10,10,10,0"
-                Source="{Binding StatusImage}"/>
             <Frame 
                 CornerRadius="10"
-                Margin="10,0,10,0"
-                BackgroundColor="LightGray">
+                Margin="10,10,10,0"
+                BorderColor="#5b178a"
+                BackgroundColor="Transparent">
                 <Label
+                    TextColor="#000"
                     Text="{Binding Name}"/>
             </Frame>
             <Frame 
                 CornerRadius="10"
                 Margin="10,10,10,0"
-                BackgroundColor="LightGray">
+                BorderColor="#5b178a"
+                BackgroundColor="Transparent">
                 <Label
+                    TextColor="#000"
                     Text="{Binding Url}"/>
             </Frame>
+            <Image
+                HeightRequest="64"
+                Margin="10,10,10,0"
+                Source="{Binding StatusImage}"/>
             <ListView x:Name="AvailabilityLogList"
-                  ItemsSource="{Binding AvailabilityLogs}"
-                  CachingStrategy="RecycleElement"
-                  Margin="10,10,10,10">
+                      ItemsSource="{Binding AvailabilityLogs}"
+                      CachingStrategy="RecycleElement"
+                      Margin="10,10,10,10"
+                      SeparatorColor="#5b178a">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Padding="5">
                                 <Image Source="{Binding StatusImage}" HeightRequest="18" />
-                                <Label Text="{Binding LogCreatedAt}" VerticalOptions="Center" />
+                                <Label Text="{Binding LogCreatedAt}" TextColor="#000" VerticalOptions="Center" />
+                                <Label Text="in" VerticalOptions="Center"/>
                                 <Label Text="{Binding LogResponseTime}" VerticalOptions="Center" />
                             </StackLayout>
                         </ViewCell>

@@ -35,7 +35,7 @@
             </ListView.ItemTemplate>
          </ListView>
         <Button Style="{StaticResource NewAttachServiceButton}"
-                Text="Add" 
+                Text="Create" 
                 Clicked="Button_Clicked"/>
     </StackLayout>
 </ContentPage>

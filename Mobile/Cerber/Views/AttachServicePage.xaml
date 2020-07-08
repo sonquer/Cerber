@@ -16,7 +16,6 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding CreateError}" />
             <Entry Placeholder="Name"
                    Margin="5,5,5,5"
                    Keyboard="Default"
@@ -38,6 +37,10 @@
                    VerticalOptions="FillAndExpand" 
                    Keyboard="Chat"
                     x:Name="expectedResponse"/>
+            <Label Text="{Binding CreateError}" 
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   TextColor="MediumVioletRed" />
             <Button Style="{StaticResource AttachServiceOkButton}"
                     Margin="5"
                     Text="Save"

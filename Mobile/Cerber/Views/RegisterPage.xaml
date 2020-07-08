@@ -16,8 +16,7 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding RegisterError}" />
-            <Grid Margin="30,200,30,30" VerticalOptions="Center">
+            <Grid Margin="30,200,30,0" VerticalOptions="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -41,6 +40,10 @@
                            x:Name="confirmPassword"/>
                 </StackLayout>
             </Grid>
+            <Label Text="{Binding RegisterError}" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   TextColor="MediumVioletRed" />
             <Button Style="{StaticResource RegisterButton}"
                     Text="Register"
                     Clicked="Register_Clicked" 
