@@ -16,10 +16,33 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
-            <Entry Placeholder="Input"
-                   Margin="30,30,30,30"/>
+            <Label Text="{Binding CreateError}" />
+            <Entry Placeholder="Name"
+                   Margin="5,5,5,5"
+                   Keyboard="Default"
+                   x:Name="name"/>
+            <Entry Placeholder="Url"
+                   Margin="5,5,5,5"
+                   Keyboard="Url"
+                   x:Name="url"/>
+            <Entry Placeholder="Expected status code"
+                   Margin="5,5,5,5"
+                   Keyboard="Numeric"
+                   x:Name="expectedStatusCode"/>
+            <Entry Placeholder="Log lifetime in hours"
+                   Margin="5,5,5,5"
+                   Keyboard="Numeric"
+                   x:Name="logLifetimeInHours"/>
+            <Editor Placeholder="Expected response"
+                   Margin="5,5,5,5"
+                   VerticalOptions="FillAndExpand" 
+                   Keyboard="Chat"
+                    x:Name="expectedResponse"/>
             <Button Style="{StaticResource AttachServiceOkButton}"
-                    Text="OK"/>
+                    Margin="5"
+                    Text="Save"
+                    Clicked="Create_Service_Clicked"
+                    IsEnabled="{Binding CreateButtonIsEnabled}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
