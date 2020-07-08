@@ -4,11 +4,15 @@ Availability check app architecture
 ---
 
 ## Mobile (Xamarin)
-- [ ] **Cerber**
-    - [ ] Connecting device with services
-    - [ ] Display all services ( services list )
-    - [ ] Display status checks ( detail page )
-    - [ ] Detach service
+- [x] **Cerber**
+    - [x] Login page
+    - [x] Register page
+    - [x] Display all services ( services list )
+    - [x] Display status checks ( detail page )
+    - [x] Create availability record
+    - [x] Sqlite db - session support
+    - [ ] Display account details based on JWT token
+    - [ ] Logout functionality
 
 ---
 ## Backend
@@ -19,11 +23,9 @@ Availability check app architecture
 - [x] **Availability.Api**
     - [x] Adding schedule event record (for checking API avability)
     - [x] Display all schedule events assigned to account
-    - [x] Function for connecting mobile device with schedule event results
+    - [x] Function display availability details
     - [x] Function to delete availability record
+    - [x] Function for update availability record
 
 ### Availability.Worker
 - [x] Function for checking API avability
-
-### Database [CosmosDB](https://azure.microsoft.com/pl-pl/services/cosmos-db/)
-https://cerber-db.documents.azure.com:443/
