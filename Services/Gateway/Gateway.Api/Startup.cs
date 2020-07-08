@@ -21,7 +21,15 @@ namespace Gateway.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHealthChecks();
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                    .SetIsOriginAllowed((host) => true)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
             services.AddOcelot(Configuration);
         }
 
@@ -32,10 +40,7 @@ namespace Gateway.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
 

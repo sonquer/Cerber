@@ -112,7 +112,15 @@ namespace Availability.Api
                 });
 
             services.AddHealthChecks();
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                    .SetIsOriginAllowed((host) => true)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
             services.AddControllers();
         }
         
@@ -141,10 +149,7 @@ namespace Availability.Api
                 c.SwaggerEndpoint("./v1/swagger.json", "Cerber Availability Api");
             });
 
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
