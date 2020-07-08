@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -25,7 +26,15 @@ namespace Availability.Api.Application.Commands.Availability
             var record = await _availabilityRecordRepository.GetById(request.Id, cancellationToken)
                 .ConfigureAwait(false);
 
-            return _mapper.Map<AvailabilityRecordDto>(record);
+            var dto = _mapper.Map<AvailabilityRecordDto>(record);
+            if(dto.AvailabilityLogs != null && dto.AvailabilityLogs.Count > 0)
+            {
+                dto.AvailabilityLogs = dto.AvailabilityLogs
+                    .OrderByDescending(e => e.CreatedAt)
+                    .ToList();
+            }
+
+            return dto;
         }
     }
 }

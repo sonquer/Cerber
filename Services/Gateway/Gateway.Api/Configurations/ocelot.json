@@ -2,7 +2,7 @@
   "Routes": [
     {
       "UpstreamPathTemplate": "/gateway/accounts/{rest}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Options", "Delete" ],
 
       "DownstreamPathTemplate": "/{rest}",
       "DownstreamScheme": "http",
@@ -15,7 +15,7 @@
     },
     {
       "UpstreamPathTemplate": "/gateway/availability/{rest}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Options", "Delete" ],
 
       "DownstreamPathTemplate": "/{rest}",
       "DownstreamScheme": "http",

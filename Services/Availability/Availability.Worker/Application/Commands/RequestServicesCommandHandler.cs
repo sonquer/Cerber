@@ -28,16 +28,11 @@ namespace Availability.Worker.Application.Commands
                 .ToListAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            Parallel.ForEach(availabilityRecordIds, new ParallelOptions
+            foreach (var availabilityRecordId in availabilityRecordIds)
             {
-                MaxDegreeOfParallelism = 8,
-                CancellationToken = cancellationToken
-            }, availabilityRecordId =>
-            {
-                _availabilityProcessor.ProcessAvailabilityRecord(availabilityRecordId, cancellationToken)
-                    .GetAwaiter()
-                    .GetResult();
-            });
+                await _availabilityProcessor.ProcessAvailabilityRecord(availabilityRecordId, cancellationToken)
+                    .ConfigureAwait(false);
+            }
         }
     }
 }
