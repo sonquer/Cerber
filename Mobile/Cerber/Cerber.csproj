@@ -34,8 +34,6 @@
     <Folder Include="Components\" />
     <Folder Include="Repository\" />
     <Folder Include="Repository\Models\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Client\Cerber.Client\Cerber.Client.csproj" />
+    <Folder Include="Generated\" />
   </ItemGroup>
 </Project>
