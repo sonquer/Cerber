@@ -37,6 +37,9 @@ namespace Availability.Api.Application.Commands.Availability
             availabilityRecord.UpdateExpectedResponse(notification.ExpectedResponse);
             availabilityRecord.UpdateExpectedStatusCode(notification.ExpectedStatusCode);
             availabilityRecord.UpdateLogLifetimeThresholdInHours(notification.LogLifetimeThresholdInHours);
+
+            _availabilityRecordRepository.Update(availabilityRecord);
+            await _availabilityRecordRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }
     }
 }
