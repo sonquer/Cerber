@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Cerber.Views.RegisterPage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Image Source="cerberus"
+                   WidthRequest="38"
+                   Margin="-56, 0, 0, 0"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid Margin="30,200,30,0" VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0">
+                    <Entry Placeholder="User Name"
+                           x:Name="email"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1">
+                    <Entry Placeholder="Password" 
+                           IsPassword="true"
+                           x:Name="password"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2">
+                    <Entry Placeholder="Confirm Password" 
+                           IsPassword="true"
+                           x:Name="confirmPassword"/>
+                </StackLayout>
+            </Grid>
+            <Label Text="{Binding RegisterError}" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   TextColor="MediumVioletRed" />
+            <Button Style="{StaticResource RegisterButton}"
+                    Text="Register"
+                    Clicked="Register_Clicked" 
+                    IsEnabled="{Binding RegisterButtonIsEnabled}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

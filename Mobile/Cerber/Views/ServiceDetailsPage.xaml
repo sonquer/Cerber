@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cerber.Views.ServiceDetailsPage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Image Source="cerberus"
+                   WidthRequest="38"
+                   Margin="-56, 0, 0, 0"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Frame 
+                CornerRadius="10"
+                Margin="10,10,10,0"
+                BorderColor="#5b178a"
+                BackgroundColor="Transparent">
+                <Label
+                    TextColor="#000"
+                    Text="{Binding Name}"/>
+            </Frame>
+            <Frame 
+                CornerRadius="10"
+                Margin="10,10,10,0"
+                BorderColor="#5b178a"
+                BackgroundColor="Transparent">
+                <Label
+                    TextColor="#000"
+                    Text="{Binding Url}"/>
+            </Frame>
+            <Image
+                HeightRequest="64"
+                Margin="10,10,10,0"
+                Source="{Binding StatusImage}"/>
+            <ListView x:Name="AvailabilityLogList"
+                      ItemsSource="{Binding AvailabilityLogs}"
+                      CachingStrategy="RecycleElement"
+                      Margin="10,10,10,10"
+                      SeparatorColor="#5b178a">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <Image Source="{Binding StatusImage}" HeightRequest="18" />
+                                <Label Text="{Binding LogCreatedAt}" TextColor="#000" VerticalOptions="Center" />
+                                <Label Text="in" VerticalOptions="Center"/>
+                                <Label Text="{Binding LogResponseTime}" VerticalOptions="Center" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

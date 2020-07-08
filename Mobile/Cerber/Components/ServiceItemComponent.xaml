@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cerber.Components.ServiceItemComponent">
+    <Frame CornerRadius="10"
+           BackgroundColor="White"
+           HasShadow="False" 
+           OutlineColor="LightGray"
+           Margin="0,0,0,20">
+        <StackLayout Orientation="Horizontal">
+            <Image Source="{Binding Path=Image}"
+                   WidthRequest="32" 
+                   HeightRequest="32"/>
+            <Label Text="{Binding Path=Name}"
+                   TextColor="black"
+                   FontSize="18"
+                   Margin="10, 0, 0, 0"
+                   VerticalOptions="Center"/>
+        </StackLayout>
+    </Frame>
+</StackLayout>

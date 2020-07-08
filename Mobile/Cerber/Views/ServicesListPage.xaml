@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:components="clr-namespace:Cerber.Components"
+             mc:Ignorable="d"
+             x:Class="Cerber.Views.ServicesListPage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Image Source="cerberus"
+                   WidthRequest="38"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <StackLayout>
+        <ListView x:Name="ServicesListView"
+                  ItemsSource="{Binding Services}"
+                  ItemTapped="Handle_ItemTapped"
+                  CachingStrategy="RecycleElement"
+                  RowHeight="75"
+                  Margin="10,10,10,10"
+                  RefreshCommand="{Binding RefreshServicesCommand}"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsRefreshing}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <components:ServiceItemComponent
+                            Name="{Binding Name}"
+                            Status="{Binding Status}" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+         </ListView>
+        <Button Style="{StaticResource NewAttachServiceButton}"
+                Text="Create" 
+                Clicked="Button_Clicked"/>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Cerber.Views.AttachServicesPage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Image Source="cerberus"
+                   WidthRequest="38"
+                   Margin="-56, 0, 0, 0"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Name"
+                   Margin="5,5,5,5"
+                   Keyboard="Default"
+                   x:Name="name"/>
+            <Entry Placeholder="Url"
+                   Margin="5,5,5,5"
+                   Keyboard="Url"
+                   x:Name="url"/>
+            <Entry Placeholder="Expected status code"
+                   Margin="5,5,5,5"
+                   Keyboard="Numeric"
+                   x:Name="expectedStatusCode"/>
+            <Entry Placeholder="Log lifetime in hours"
+                   Margin="5,5,5,5"
+                   Keyboard="Numeric"
+                   x:Name="logLifetimeInHours"/>
+            <Editor Placeholder="Expected response"
+                   Margin="5,5,5,5"
+                   VerticalOptions="FillAndExpand" 
+                   Keyboard="Chat"
+                    x:Name="expectedResponse"/>
+            <Label Text="{Binding CreateError}" 
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   TextColor="MediumVioletRed" />
+            <Button Style="{StaticResource AttachServiceOkButton}"
+                    Margin="5"
+                    Text="Save"
+                    Clicked="Create_Service_Clicked"
+                    IsEnabled="{Binding CreateButtonIsEnabled}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
