@@ -56,7 +56,10 @@ namespace Cerber
 
         protected static void BuildContainer()
         {
-            container = builder.Build();
+            if (container is null)
+            {
+                container = builder.Build();
+            }
         }
     }
 }

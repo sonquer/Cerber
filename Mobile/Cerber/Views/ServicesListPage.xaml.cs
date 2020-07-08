@@ -15,6 +15,11 @@ namespace Cerber.Views
             InitializeComponent();
 
             BindingContext = new ServicesListViewModel(Navigation);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
             _viewModel.RefreshServicesCommand.Execute(null);
         }
