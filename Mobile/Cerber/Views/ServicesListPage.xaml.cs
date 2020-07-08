@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using Cerber.Models;
-using Cerber.Repository;
+﻿using Cerber.Models;
 using Cerber.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

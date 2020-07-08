@@ -13,22 +13,40 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
+            <Image
+                HeightRequest="64"
+                Margin="10,10,10,0"
+                Source="{Binding StatusImage}"/>
             <Frame 
                 CornerRadius="10"
-                Margin="10,10,10,0"
+                Margin="10,0,10,0"
                 BackgroundColor="LightGray">
                 <Label
-                    Text="Import.Api"/>
+                    Text="{Binding Name}"/>
             </Frame>
             <Frame 
                 CornerRadius="10"
                 Margin="10,10,10,0"
                 BackgroundColor="LightGray">
                 <Label
-                    Text="Opis"
-                    LineBreakMode="WordWrap"
-                    HeightRequest="80"/>
+                    Text="{Binding Url}"/>
             </Frame>
+            <ListView x:Name="AvailabilityLogList"
+                  ItemsSource="{Binding AvailabilityLogs}"
+                  CachingStrategy="RecycleElement"
+                  Margin="10,10,10,10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <Image Source="{Binding StatusImage}" HeightRequest="18" />
+                                <Label Text="{Binding LogCreatedAt}" VerticalOptions="Center" />
+                                <Label Text="{Binding LogResponseTime}" VerticalOptions="Center" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

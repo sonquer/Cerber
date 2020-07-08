@@ -1,17 +1,20 @@
 ﻿using Cerber.Models;
+using Cerber.ViewModels;
 using Xamarin.Forms;
 
 namespace Cerber.Views
 {
     public partial class ServiceDetailsPage : ContentPage
     {
-        private readonly ServiceModel _serviceModel;
+        private ServiceDetailsViewModel _viewModel => BindingContext as ServiceDetailsViewModel;
 
         public ServiceDetailsPage(ServiceModel serviceModel)
         {
             InitializeComponent();
 
-            _serviceModel = serviceModel;
+            BindingContext = new ServiceDetailsViewModel(serviceModel);
+
+            _viewModel.LoadServiceDetails.Execute(null);
         }
     }
 }
