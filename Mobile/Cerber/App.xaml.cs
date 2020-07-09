@@ -24,7 +24,7 @@ namespace Cerber
             var repository = DependencyService.Resolve<IRepository>();
             if (repository.GetToken() != null)
             {
-                MainPage = new NavigationPage(new ServicesListPage());
+                MainPage = new MainPage();
             }
             else
             {

@@ -93,7 +93,7 @@ namespace Cerber.ViewModels
 
                 IsLoading = false;
 
-                Application.Current.MainPage = new NavigationPage(new ServicesListPage());
+                Application.Current.MainPage = new MainPage();
             }
             catch (Exception)
             {

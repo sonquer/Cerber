@@ -5,37 +5,47 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:components="clr-namespace:Cerber.Components"
              mc:Ignorable="d"
-             x:Class="Cerber.Views.ServicesListPage">
+             x:Class="Cerber.Views.ServicesListPage"
+             Title="Services list">
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
             <Image Source="cerberus"
                    WidthRequest="38"
+                   Margin="-72, 0, 0, 0"
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </NavigationPage.TitleView>
-    <StackLayout>
-        <ListView x:Name="ServicesListView"
-                  ItemsSource="{Binding Services}"
-                  ItemTapped="Handle_ItemTapped"
-                  CachingStrategy="RecycleElement"
-                  RowHeight="75"
-                  Margin="10,10,10,10"
-                  RefreshCommand="{Binding RefreshServicesCommand}"
-                  IsPullToRefreshEnabled="True"
-                  IsRefreshing="{Binding IsRefreshing}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <components:ServiceItemComponent
-                            Name="{Binding Name}"
-                            Status="{Binding Status}" />
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-         </ListView>
-        <Button Style="{StaticResource NewAttachServiceButton}"
-                Text="Create" 
-                Clicked="Button_Clicked"/>
-    </StackLayout>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="64" />
+            </Grid.RowDefinitions>
+            <ListView x:Name="ServicesListView"
+                      Grid.Row="0"
+                      ItemsSource="{Binding Services}"
+                      ItemTapped="Handle_ItemTapped"
+                      CachingStrategy="RecycleElement"
+                      RowHeight="75"
+                      Margin="10,10,10,10"
+                      RefreshCommand="{Binding RefreshServicesCommand}"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsRefreshing}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <components:ServiceItemComponent
+                                Name="{Binding Name}"
+                                Status="{Binding Status}" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Style="{StaticResource NewAttachServiceButton}"
+                    Grid.Row="1"
+                    Text="Create"
+                    Clicked="Button_Clicked"/>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>
