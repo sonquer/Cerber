@@ -10,12 +10,12 @@
         <item name="windowActionBar">false</item>
         <!-- Set theme colors from https://aka.ms/material-colors -->
         <!-- colorPrimary is used for the default action bar background -->
-        <item name="colorPrimary">#5b178a</item>
+        <item name="colorPrimary">#283593</item>
         <!-- colorPrimaryDark is used for the status bar -->
-        <item name="colorPrimaryDark">#310D4B</item>
+        <item name="colorPrimaryDark">#001064</item>
         <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-        <item name="colorAccent">#310D4B</item>
+        <item name="colorAccent">#001064</item>
         <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
         <item name="windowActionModeOverlay">true</item>
@@ -23,6 +23,6 @@
         <item name="android:colorActivatedHighlight">@android:color/transparent</item>
     </style>
     <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">#FF4081</item>
+        <item name="colorAccent">#5f5fc4</item>
     </style>
 </resources>

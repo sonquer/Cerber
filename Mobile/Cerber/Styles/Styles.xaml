@@ -9,44 +9,48 @@
         <Setter Property="VerticalOptions" Value="EndAndExpand" />
         <Setter Property="Margin" Value="5,5,5,5" />
         <Setter Property="TextColor" Value="Black" />
-        <Setter Property="BorderWidth" Value="2" />
-        <Setter Property="BorderColor" Value="#5b178a"/>
-        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="BorderWidth" Value="6" />
+        <Setter Property="BorderColor" Value="#001064"/>
+        <Setter Property="BackgroundColor" Value="#283593"/>
+        <Setter Property="TextColor" Value="#fff"/>
     </Style>
 
     <Style TargetType="Button" x:Key="AttachServiceOkButton">
         <Setter Property="BorderRadius" Value="10" />
         <Setter Property="HorizontalOptions" Value="End" />
         <Setter Property="Margin" Value="0,0,30,0" />
-        <Setter Property="BorderWidth" Value="2" />
-        <Setter Property="BorderColor" Value="#5b178a"/>
-        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="BorderWidth" Value="6" />
+        <Setter Property="BorderColor" Value="#001064"/>
+        <Setter Property="BackgroundColor" Value="#283593"/>
+        <Setter Property="TextColor" Value="#fff"/>
     </Style>
 
     <Style TargetType="Button" x:Key="LoginButton">
         <Setter Property="BorderRadius" Value="10" />
         <Setter Property="HorizontalOptions" Value="End" />
         <Setter Property="Margin" Value="0,0,30,0" />
-        <Setter Property="BorderWidth" Value="2" />
-        <Setter Property="BorderColor" Value="#5b178a"/>
-        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="BorderWidth" Value="6" />
+        <Setter Property="BorderColor" Value="#001064"/>
+        <Setter Property="BackgroundColor" Value="#283593"/>
+        <Setter Property="TextColor" Value="#fff"/>
     </Style>
 
     <Style TargetType="Button" x:Key="RegisterButton">
         <Setter Property="BorderRadius" Value="10" />
         <Setter Property="HorizontalOptions" Value="End" />
         <Setter Property="Margin" Value="0,0,30,0" />
-        <Setter Property="BorderWidth" Value="2" />
-        <Setter Property="BorderColor" Value="#5b178a"/>
-        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="BorderWidth" Value="6" />
+        <Setter Property="BorderColor" Value="#001064"/>
+        <Setter Property="BackgroundColor" Value="#283593"/>
+        <Setter Property="TextColor" Value="#fff"/>
     </Style>
     
     <Style TargetType="Button" x:Key="LogoutButton">
         <Setter Property="BorderRadius" Value="10" />
         <Setter Property="Margin" Value="5,5,5,5" />
-        <Setter Property="BorderWidth" Value="2" />
-        <Setter Property="BorderColor" Value="#310D4B"/>
-        <Setter Property="BackgroundColor" Value="#5b178a"/>
+        <Setter Property="BorderWidth" Value="6" />
+        <Setter Property="BorderColor" Value="#001064"/>
+        <Setter Property="BackgroundColor" Value="#283593"/>
         <Setter Property="TextColor" Value="#fff"/>
     </Style>
 
