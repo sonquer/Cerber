@@ -1,4 +1,6 @@
+using System;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,18 +19,47 @@ namespace Availability.Worker.Application.Services.Availability
         
         public async Task<AvailabilityResponseModel> Request(string url, CancellationToken cancellationToken)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Add("User-Agent", "Cerber-AvailabilityService");
+            return await GetValueWithTimeout(url, 10_000);
+        }
 
-            var client = _clientFactory.CreateClient();
+        private async Task<AvailabilityResponseModel> GetValueWithTimeout(string url, int milliseconds)
+        {
+            CancellationTokenSource cts = new CancellationTokenSource();
+            CancellationToken token = cts.Token;
+            cts.CancelAfter(milliseconds);
+            token.ThrowIfCancellationRequested();
 
-            var sw = Stopwatch.StartNew();
-            var response = await client.SendAsync(request, cancellationToken);
-            sw.Stop();
+            var workerTask = Task.Run(async () =>
+            {
+                var sw = Stopwatch.StartNew();
 
-            var responseString = await response.Content.ReadAsStringAsync();
+                try {
+                    var request = new HttpRequestMessage(HttpMethod.Get, url);
+                    request.Headers.Add("User-Agent", "Cerber-AvailabilityService");
 
-            return new AvailabilityResponseModel(response.StatusCode, sw.ElapsedMilliseconds, responseString);
+                    var client = _clientFactory.CreateClient();
+
+                    var response = await client.SendAsync(request, token);
+                    sw.Stop();
+
+                    var responseString = await response.Content.ReadAsStringAsync();
+
+                    return new AvailabilityResponseModel(response.StatusCode, sw.ElapsedMilliseconds, responseString);
+                }
+                catch {
+                    sw.Stop();
+                    return new AvailabilityResponseModel(HttpStatusCode.InternalServerError, sw.ElapsedMilliseconds, null);
+                }
+            }, token);
+
+            try
+            {
+                return await workerTask;
+            }
+            catch (OperationCanceledException)
+            {
+                return new AvailabilityResponseModel(HttpStatusCode.RequestTimeout, milliseconds, null);
+            }
         }
     }
 }
