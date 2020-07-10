@@ -12,7 +12,7 @@ Availability check app architecture
     - [x] Create availability record
     - [x] Sqlite db - session support
     - [ ] Display account details based on JWT token
-    - [ ] Logout functionality
+    - [x] Logout functionality
 
 ---
 ## Backend
